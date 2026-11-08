@@ -38,7 +38,7 @@ function render(state: PdfPasswordUiState): void {
   cancel.textContent = s.cancel
 
   const failed = state.retry && !state.busy
-  // a rejected attempt comes back with retry=true — clear it for the next try
+  // a rejected attempt comes back with retry=true - clear it for the next try
   if (failed) password.value = ''
   password.classList.toggle('invalid', failed)
   pwdWrap.classList.toggle('has-error', failed)
@@ -84,7 +84,7 @@ eye.addEventListener('click', () => {
   password.type = show ? 'text' : 'password'
   eye.classList.toggle('showing', show)
   eye.setAttribute('aria-label', show ? hideLabel : showLabel)
-  // the type swap resets the caret to 0 — restore it now and again on the
+  // the type swap resets the caret to 0 - restore it now and again on the
   // next frame, since Chromium clears it once more asynchronously
   const restore = (): void => {
     if (document.activeElement === password) password.setSelectionRange(caret[0], caret[1])

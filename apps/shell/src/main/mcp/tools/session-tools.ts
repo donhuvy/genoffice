@@ -24,7 +24,7 @@ export type { SessionFamily }
 /**
  * Resolve a document reference (tab id, or path) to the webContents id of that
  * open tab. The content tools call this when the caller passed `document`, which
- * redirects the edit from the session's own blank tab to one the user has open —
+ * redirects the edit from the session's own blank tab to one the user has open -
  * the bridges are addressed by webContents id, so no session is involved.
  *
  * With `focus`, the tab is also brought into view (activated, and the window
@@ -88,10 +88,10 @@ export function createSessionHost(): SessionHost {
     },
     current: () => active,
     require(family) {
-      if (!active) throw new Error('no session is open — call create_session first')
+      if (!active) throw new Error('no session is open - call create_session first')
       if (active.family !== family) {
         throw new Error(
-          `the active session is a ${familyLabel(active.family)} — call create_session with family "${family}" first`,
+          `the active session is a ${familyLabel(active.family)} - call create_session with family "${family}" first`,
         )
       }
       return active.wcId
@@ -106,7 +106,7 @@ export function createSessionHost(): SessionHost {
  * Where a content tool should send its command: the open document the caller
  * named, or the session's own tab when they named none.
  *
- * Naming a document is the escape hatch from the single-session model — an agent
+ * Naming a document is the escape hatch from the single-session model - an agent
  * can edit the workbook the user is looking at without a `create_session`, and
  * without that session's blank tab being replaced. The tab keeps its own
  * dirty/save lifecycle: MCP edits land in the live document and the user decides
@@ -143,7 +143,7 @@ export function createSessionTools(
       description:
         `Open a new empty file in a visible GenOffice tab and start an editing session; family picks the editor: ${listing}. ` +
         "Then add content with that family's tools (docs: insert_content / replace_blocks / apply_ops; slides: apply_slide_ops; sheets: apply_sheet_ops) and finish with save_session. " +
-        'One session is active at a time — a new create_session replaces it. The user watches each step in the app.',
+        'One session is active at a time - a new create_session replaces it. The user watches each step in the app.',
       inputSchema: {
         family: z.enum(families).describe('which editor to open'),
       },
@@ -177,7 +177,7 @@ export function createSessionTools(
       },
       handler: async (args) => {
         const session = host.current()
-        if (!session) throw new Error('no session is open — call create_session first')
+        if (!session) throw new Error('no session is open - call create_session first')
         const driver = byFamily.get(session.family)
         if (!driver) throw new Error(`no driver for the active "${session.family}" session`)
         const requested = String(args.path ?? '')

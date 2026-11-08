@@ -36,7 +36,7 @@ function readAiSettingsFile(): unknown {
  * Ask the model for a name, and return it as a bare file stem.
  *
  * This runs one cheap turn and takes the first line. If the provider is
- * unreachable the caller keeps whatever name the document already has — a
+ * unreachable the caller keeps whatever name the document already has - a
  * failed rename must never cost the reader their file.
  */
 async function askModel(content: string, lang: string): Promise<string> {
@@ -84,8 +84,8 @@ export function registerAiNamingIpc(lang: () => string): void {
       const content = typeof input?.content === 'string' ? input.content : ''
       if (!content.trim()) return { ok: false, reason: 'empty-content' }
       const name = await askModel(content, lang())
-      // A model that returned nothing usable — no provider, unreachable,
-      // refused, or a stem that sanitised away to empty — is a *failed* naming,
+      // A model that returned nothing usable - no provider, unreachable,
+      // refused, or a stem that sanitised away to empty - is a *failed* naming,
       // not a successful one handing back "". The caller's contract is that it
       // keeps whatever name the document already had, and returning ok:true
       // with an empty name would instead rename the file to nothing.

@@ -1,7 +1,7 @@
 /**
  * In-renderer notice that files on disk changed through the chrome (a tab
  * rename, for instance). Home and the tab strip live in the same renderer but
- * do not share state, and Home otherwise re-pulls only on window focus — which
+ * do not share state, and Home otherwise re-pulls only on window focus - which
  * does not fire when the shell webContents already held focus (the rename
  * input lives in it), so a rename from the tab strip would leave the Home list
  * showing the old name until the next focus change.

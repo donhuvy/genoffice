@@ -26,7 +26,7 @@ function ctimeToMs(ctime: string): number {
 
 /**
  * Account tag the store is bound to: a salted hash of the API key (never the
- * key itself). A key change — logout, account switch, even rotation — makes
+ * key itself). A key change - logout, account switch, even rotation - makes
  * the stored list unreadable so one account can never see another's projects.
  * (exported for tests)
  */

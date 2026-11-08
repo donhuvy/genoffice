@@ -3,7 +3,7 @@
  *
  * Each topic is one markdown file per language under ./topics (`<id>.zh.md`,
  * `<id>.en.md`), bundled at build time via import.meta.glob(?raw). A topic is
- * discovered by listing it here — the registry is what search indexes and the
+ * discovered by listing it here - the registry is what search indexes and the
  * sidebar renders, so a feature without a manual entry is a visible gap in
  * this list rather than an invisible one.
  */

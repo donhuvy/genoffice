@@ -1,5 +1,5 @@
 /**
- * Interface scale (issue genoffice#1913) — the user's "make the UI bigger" preference.
+ * Interface scale (issue genoffice#1913) - the user's "make the UI bigger" preference.
  *
  * ## Why a CSS variable and not `webContents.setZoomFactor()`
  *
@@ -12,8 +12,8 @@
  *
  * So the scale lands on one custom property instead. The main process writes it
  * into every live renderer; each chrome container opts in with
- * `zoom: var(--ui-scale)`, and document canvases — which are siblings of those
- * containers, never children — never see it. The two mechanisms cannot compose
+ * `zoom: var(--ui-scale)`, and document canvases - which are siblings of those
+ * containers, never children - never see it. The two mechanisms cannot compose
  * because they never overlap.
  *
  * ## What this costs, honestly
@@ -24,7 +24,7 @@
  * not reflow clip instead of shrinking: at 175/200% the ribbon fits fewer items
  * and scrolls, the AI panel scrolls vertically, and Univer's formula bar and
  * sheet tabs keep rendering at 100%. Until those reflow, the presets stop at
- * 150% — the largest step every surface holds without clipping — and the higher
+ * 150% - the largest step every surface holds without clipping - and the higher
  * steps (plus Docs/Slides/PDF/Markdown/HTML chrome, which follow in a part 2)
  * wait for that work rather than shipping a setting that breaks the layout.
  */
@@ -78,7 +78,7 @@ export function stepUiScale(scale: number, direction: 1 | -1): number {
  *
  * An inline style, not `insertCSS`: the shared token sheet already declares
  * `--ui-scale: 1` on `:root`, and a second author-level `:root` rule loses to
- * it on sheet order — which reads as "the setting is ignored" while every call
+ * it on sheet order - which reads as "the setting is ignored" while every call
  * reports success. An inline declaration on `documentElement` wins by
  * construction, and `executeJavaScript` needs nothing from the page, so all six
  * editors get it without knowing this module exists.
@@ -94,7 +94,7 @@ export function applyUiScaleTo(contents: Electron.WebContents, scale: number): v
     })
 }
 
-/** Push the scale to every live webContents — shell window, tab views, detached windows. */
+/** Push the scale to every live webContents - shell window, tab views, detached windows. */
 export function applyUiScaleToAll(scale: number): void {
   for (const contents of webContents.getAllWebContents()) {
     if (contents.isDestroyed()) continue
@@ -125,7 +125,7 @@ export function setUiScale(settingsPath: string, scale: number): number {
 const changeListeners = new Set<(scale: number) => void>()
 
 /**
- * Register what has to happen when the scale changes — today that is the
+ * Register what has to happen when the scale changes - today that is the
  * shell's re-layout and its title-bar overlay.
  *
  * A listener registry rather than an import of the shell's window code: the

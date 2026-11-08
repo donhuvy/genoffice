@@ -20,10 +20,10 @@ import type { CliRunner } from './mcp/cli-runner'
  * sends a command line and the files it wants staged; this module decides what
  * may run and where it may touch the disk:
  *
- * - only document commands — no `open`, `mcp`, `skill`, `install-cli`;
+ * - only document commands - no `open`, `mcp`, `skill`, `install-cli`;
  * - no `--force`; `apply` / `replace` without `--out` (an in-place edit) only
  *   for a file inside the output directory, and a copy of the original goes
- *   to the work directory first — a starred source elsewhere is never
+ *   to the work directory first - a starred source elsewhere is never
  *   rewritten;
  * - reads and writes confined by GENOFFICE_ALLOWED_ROOTS to the conversation's
  *   work directory, the save folder, and the folders of the starred files and
@@ -236,7 +236,7 @@ export async function runHomeCli(
     const target = resolve(ctx.workDir, inPlace)
     if (!isInside(ctx.outDir, target)) {
       throw new HomeCliError(
-        `${args[0]} ${args[1]} rewrites ${inPlace} in place; that is only allowed inside the output directory — add --out <path under the output directory>`,
+        `${args[0]} ${args[1]} rewrites ${inPlace} in place; that is only allowed inside the output directory - add --out <path under the output directory>`,
       )
     }
     const backupDir = join(ctx.workDir, '.backup')

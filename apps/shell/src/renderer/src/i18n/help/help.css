@@ -2,7 +2,7 @@
    Every colour below is a token from packages/ui/src/tokens.css, so the manual
    follows the light and dark themes like the rest of the chrome. The local
    palette it replaces named two variables that exist nowhere, and its cards
-   were built from white alpha values — right in one theme, invisible in the
+   were built from white alpha values - right in one theme, invisible in the
    other. */
 
 .help-root {

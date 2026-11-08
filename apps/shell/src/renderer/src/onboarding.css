@@ -104,7 +104,7 @@
   border-radius: 13.5px;
 }
 
-/* decorative glyphs: exact design-spec vectors — 60px box, 4px strokes, bare
+/* decorative glyphs: exact design-spec vectors - 60px box, 4px strokes, bare
  * black line art matching the app icon's visual mass */
 .onb-art-badge {
   display: flex;
@@ -195,7 +195,7 @@
   line-height: 1.4;
 }
 
-/* slide 3's star ask: same panel treatment as the offer, but low-key — a
+/* slide 3's star ask: same panel treatment as the offer, but low-key - a
  * one-line hint plus an outline CTA that opens the GitHub repo */
 .onb-star {
   display: flex;
@@ -274,9 +274,9 @@
   line-height: normal;
 }
 
-/* the offer CTA is the dialog's standout action: a weighted blue outline —
+/* the offer CTA is the dialog's standout action: a weighted blue outline -
  * 1.5px border + semibold + a faint blue seat-shadow so it doesn't float on
- * the tinted panel — inverting to solid blue on hover */
+ * the tinted panel - inverting to solid blue on hover */
 .onb-join {
   display: inline-flex;
   align-items: center;
@@ -394,7 +394,7 @@
 }
 
 /* replace the UA default focus ring (tinted by the OS accent color) with the
- * brand ring, and only for keyboard focus — clicks stay ring-free */
+ * brand ring, and only for keyboard focus - clicks stay ring-free */
 .onb-next:focus,
 .onb-back:focus,
 .onb-skip:focus,

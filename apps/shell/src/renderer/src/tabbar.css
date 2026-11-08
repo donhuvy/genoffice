@@ -5,7 +5,7 @@
 /* Interface scale (issue #1913).
  *
  * The shell window is its own webContents and the six editors are
- * WebContentsViews painted beside it, never inside it — so zooming the shell's
+ * WebContentsViews painted beside it, never inside it - so zooming the shell's
  * frame cannot reach a document canvas. That is the whole reason this is a
  * `--ui-scale` variable and not a window zoom: see src/main/ui-scale.ts. */
 .app-frame {
@@ -83,7 +83,7 @@ body.overlay-title-bar .tab-bar-drag-spacer {
   gap: 8px;
   /* tab body is 34px tall and sits flush with the bar bottom; the 6px
    * bottom padding centers content in the upper 28px band, on the same
-   * line as the hover capsule — measured from Chrome, whose favicons sit
+   * line as the hover capsule - measured from Chrome, whose favicons sit
    * 3px above the tab's geometric center */
   margin-top: 6px;
   /* 12px left = 3px plate inset + 9px icon-to-plate, per Chrome @2x */
@@ -99,9 +99,9 @@ body.overlay-title-bar .tab-bar-drag-spacer {
 }
 
 /* Home carries the product name and is never closable, so it hugs its own
- * content instead of sharing the document tabs' 240px flex basis — and it
+ * content instead of sharing the document tabs' 240px flex basis - and it
  * never shrinks, so "GenOffice" stays whole however many tabs are open.
- * ("tab-home", not "home" — home.css owns `.home` for the home page
+ * ("tab-home", not "home" - home.css owns `.home` for the home page
  * container living in this same document.) */
 .tab-item.tab-home {
   flex: 0 0 auto;
@@ -130,7 +130,7 @@ body.overlay-title-bar .tab-bar-drag-spacer {
 
 /* separators vanish next to the active or hovered tab.
  * `:not(.active)` on the right-hand side is load-bearing: an active tab's
- * ::before is its left foot, not a separator — hiding it would cut the
+ * ::before is its left foot, not a separator - hiding it would cut the
  * rounded corner whenever the hovered/dragged tab sits just before it */
 .tab-item:not(.active):hover::before,
 .tab-item:hover + .tab-item:not(.active)::before,
@@ -159,12 +159,12 @@ body.overlay-title-bar .tab-bar-drag-spacer {
   opacity: 0;
 }
 
-/* The highlight "plate" — one element serves both states so hover and
+/* The highlight "plate" - one element serves both states so hover and
  * active share the exact same left/right edges (measured from Chrome:
  * icon 18px@2x and × 30px@2x from the plate edges in BOTH states, and
  * every plate is inset ~3px from its tab box, giving adjacent plates
  * their constant 6px separation). Activating a hovered tab must not
- * change the plate's width — only its height/shape. */
+ * change the plate's width - only its height/shape. */
 .tab-plate {
   position: absolute;
   /* hover shape: flush with the tab top, 28px tall, 9px radius */

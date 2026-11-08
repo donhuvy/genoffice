@@ -110,7 +110,7 @@ export function describeRoot(root: string): FolderRoot {
   try {
     // per-level mkdir, not recursive: a filesystem that refuses the leaf while
     // its parent exists (Defender Controlled Folder Access on Documents) makes
-    // the recursive form spin the main process forever — see mkdirDirs.
+    // the recursive form spin the main process forever - see mkdirDirs.
     mkdirDirs(root)
     accessSync(root, constants.W_OK)
     usable = statSync(root).isDirectory()
@@ -198,7 +198,7 @@ export function createFolder(parent: string, name: string, errors: FolderErrors)
 }
 
 /**
- * `name.ext` → `name (2).ext`, `name (3).ext`… — first free name inside dir.
+ * `name.ext` → `name (2).ext`, `name (3).ext`… - first free name inside dir.
  * A folder has no extension, so `isDir` appends the counter to the whole name:
  * splitting `v1.0` would yield the mid-name `v1 (2).0`.
  */
@@ -380,7 +380,7 @@ export class FolderWatcher {
     const rel = filename == null ? '' : filename.toString()
     const changed = rel ? join(this.root, rel) : this.root
     // a created/removed folder changes its parent's listing; a file inside
-    // changes its own folder's listing — report both candidates
+    // changes its own folder's listing - report both candidates
     this.pending.add(dirname(changed))
     let isDir: boolean
     try {

@@ -5,7 +5,7 @@ import { readAppSettings, writeAppSetting, writeAppSettings } from './app-settin
  * Anonymous usage analytics via the GA4 Measurement Protocol.
  *
  * Official builds get the measurement id / api secret injected at package
- * time (electron-builder extraMetadata, fed by CI secrets — see
+ * time (electron-builder extraMetadata, fed by CI secrets - see
  * apps/shell/electron-builder.cjs). The credentials never live in the repo:
  * source builds and forks have no keys, createAnalytics() then returns a
  * no-op tracker and the app behaves identically minus the reporting.
@@ -47,7 +47,7 @@ export interface Analytics {
 
 /**
  * Pull the injected GA4 credentials out of a parsed package.json. Returns
- * null unless both fields are non-empty strings — the caller then installs
+ * null unless both fields are non-empty strings - the caller then installs
  * the no-op tracker.
  */
 export function extractAnalyticsKeys(pkg: unknown): AnalyticsKeys | null {

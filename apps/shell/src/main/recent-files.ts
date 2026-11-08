@@ -72,7 +72,7 @@ export function normalizeRecentQuery(
     ? Math.min(RECENT_PAGE_MAX, Math.max(0, Math.floor(rawLimit)))
     : RECENT_PAGE_DEFAULT
   // Sidebar keys are bare extensions ("xlsx"), but IPC callers may send
-  // ".xlsx", " XLSX ", or "..." — normalize so openable files cannot hide
+  // ".xlsx", " XLSX ", or "..." - normalize so openable files cannot hide
   // behind a filter that only differs in dots/case/whitespace.
   const rawExt =
     typeof query.ext === 'string' ? query.ext.trim().toLowerCase().replace(/^\.+/, '') : ''
@@ -90,7 +90,7 @@ export const EXT_FAMILY: Record<string, readonly string[]> = {
   xlsx: ['xlsx', 'xlsm', 'xls', 'csv', 'tsv', 'ods', 'ots'],
   pptx: ['pptx', 'ppt', 'odp', 'otp'],
   // the text app opens txt/json as source too, so the sidebar "md" filter has
-  // to page them in the same way Home's FILTER_FAMILY already does — otherwise
+  // to page them in the same way Home's FILTER_FAMILY already does - otherwise
   // the two views disagree about which files the filter means.
   md: ['md', 'markdown', 'txt', 'json'],
   html: ['html', 'htm'],

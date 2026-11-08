@@ -17,7 +17,7 @@ import type { CliRunner } from '../cli-runner'
  * Docx MCP tool surface.
  *
  * Headless generation/reading (create_docx, read_docx) delegates to the
- * bundled `genoffice` CLI — the same engines the app ships — instead of
+ * bundled `genoffice` CLI - the same engines the app ships - instead of
  * reimplementing conversion here (see ../headless-cli.ts, ../cli-runner.ts).
  * The visible document session is the part the CLI cannot do: driving the
  * editor tab the user has open. Dependencies are injected so this module stays
@@ -29,7 +29,7 @@ export interface DocToolDeps {
   /** directory generated files land in when the caller gives no path */
   defaultSaveDir: () => string
   /** expose the headless create_docx tool (generation without opening the UI);
-   *  default true — the shell passes the user's "background generation" setting */
+   *  default true - the shell passes the user's "background generation" setting */
   background?: boolean
   /** open a file in the GenOffice UI; wired in M4 (optional in tests) */
   openInTab?: (filePath: string) => Promise<void> | void
@@ -330,7 +330,7 @@ export function createDocumentTools(deps: DocToolDeps, host: SessionHost): McpTo
         // generate tool at all, so advertising docx/pptx/xlsx would describe
         // capabilities this client cannot reach.
         formats: deps.background === false ? [] : ['docx', ...(deps.extraFormats ?? [])],
-        // editor truth vs. what this server exposes — see tools/formats.ts
+        // editor truth vs. what this server exposes - see tools/formats.ts
         families: capabilityReport({ generating: deps.background !== false }),
       }),
     },
@@ -357,7 +357,7 @@ export function documentDriver(docs: DocsControl): FamilyDriver {
  * pipeline (the same restricted-HTML parser, ops executor and save path), so the
  * result matches what the in-app AI produces.
  *
- * Only registered when the shell wired a DocsControl — headless/unit runs keep
+ * Only registered when the shell wired a DocsControl - headless/unit runs keep
  * the phase-1 file-only surface.
  */
 function createDocxContentTools(deps: DocToolDeps, host: SessionHost): McpToolDefinition[] {

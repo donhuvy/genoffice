@@ -321,7 +321,7 @@ export function IntegrationsPane({
                   <ul className="set-intg-legacy">
                     {legacy.map((c) => (
                       <li key={c.path} className="set-intg-legacy-item">
-                        {c.label} — {c.path}
+                        {c.label} - {c.path}
                       </li>
                     ))}
                   </ul>

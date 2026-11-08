@@ -243,7 +243,7 @@ async function resumeDownload(
     cancelCheck()
     if (error instanceof DownloadAbortedError) throw error
     // the request could not be placed at all (proxy black hole, DNS, TLS,
-    // offline) — let the stock stack (electron net, its proxy/session handling,
+    // offline) - let the stock stack (electron net, its proxy/session handling,
     // its own timeouts) try instead of turning resume into a regression
     return fallback(url, destination, options)
   }

@@ -1,6 +1,6 @@
 export type TabKind = 'home' | 'docs' | 'sheets' | 'slides' | 'pdf' | 'markdown' | 'html' | 'help'
 
-/** a tab that holds a document — every kind except the Home screen and the in-app manual */
+/** a tab that holds a document - every kind except the Home screen and the in-app manual */
 export type DocumentTabKind = Exclude<TabKind, 'home' | 'help'>
 
 /** one open tab in the top tab strip; Home is always id 'home' and not closable */
@@ -58,7 +58,7 @@ export interface TabsApi {
   detach(id: string): Promise<void>
   /**
    * Tear a tab off mid-drag: the tab leaves the strip and its live view lands
-   * in a new window placed so that (screenX, screenY) — the pointer — sits in
+   * in a new window placed so that (screenX, screenY) - the pointer - sits in
    * the window's title bar. The window is shown without taking focus so the
    * shell keeps receiving the held pointer's moves. False when the tab cannot
    * be torn off (Home, Present tabs, a tab mid close-prompt).
@@ -98,8 +98,8 @@ export interface TabsApi {
    */
   notifyChromePressed(): void
   /** the main-process broadcast that notifyChromePressed (and a window drag)
-   * triggers; the shell's own popovers subscribe so a title-bar drag — which
-   * produces no DOM event — still dismisses them */
+   * triggers; the shell's own popovers subscribe so a title-bar drag - which
+   * produces no DOM event - still dismisses them */
   onChromePressed(handler: () => void): () => void
   /** subscribe to main process requesting inline rename of a tab */
   onStartRename?(handler: (id: string) => void): () => void

@@ -44,7 +44,7 @@ import sendStop from './assets/send-stop.png'
 /**
  * The home screen's knowledge-base ask panel: chat with the reader's starred
  * corpus without opening a document. First app-side consumer of the shell's
- * kb:* gateway — the loop, streaming and rendering reuse what every editor's
+ * kb:* gateway - the loop, streaming and rendering reuse what every editor's
  * AI panel uses (AgentLoop + createIpcTransport + Markdown with a filenav
  * nav), so answers cite the folder and file they came from and clicking a
  * citation opens that file in the app that owns it.
@@ -59,7 +59,7 @@ import sendStop from './assets/send-stop.png'
  *
  * That constant is also the limit of what exists so far: one transcript, no
  * list, no name, and nothing to start a second conversation. A reader with two
- * questions on two days gets one long thread — a list, per-conversation ids
+ * questions on two days gets one long thread - a list, per-conversation ids
  * and a name are the next layer, not this one.
  */
 
@@ -94,8 +94,8 @@ interface AskMessage {
 /**
  * The panel's conversations, newest first, labelled by their own first question.
  *
- * A stored conversation has no title — the store writes `<chat-id>.jsonl` and
- * nothing else — so the first thing said in it is the only honest label. A
+ * A stored conversation has no title - the store writes `<chat-id>.jsonl` and
+ * nothing else - so the first thing said in it is the only honest label. A
  * blank one falls back to the id, which at least is unique and copyable.
  *
  * The list is sorted here rather than trusting the store to: `listChats`
@@ -140,12 +140,12 @@ export function firstQuestionOf(stored: readonly ChatMessage[]): string | undefi
 
 /**
  * Claims the panel's transcript: resolves its ids, reads back what is already
- * stored, then writes whatever turns were asked before the ids landed — the
+ * stored, then writes whatever turns were asked before the ids landed - the
  * stored thread is older than anything asked meanwhile, so it is shown and
  * written first. `queued` is drained; a turn queued after the drain is the
  * caller's to flush once the ids are in hand.
  *
- * Split out of the effect so the ordering is testable without a DOM — the
+ * Split out of the effect so the ordering is testable without a DOM - the
  * panel is the only conversation in the app that belongs to no file, so
  * nothing else exercises the file-less `resolveChat` path end to end.
  */
@@ -244,7 +244,7 @@ export function KbAskPanel({
   }
 
   useEffect(() => {
-    // Claim whichever thread is active — the fixed home thread on mount, the
+    // Claim whichever thread is active - the fixed home thread on mount, the
     // chosen id after a chip click or a new thread. The ids resolve in the
     // background, so a turn asked before they land is queued by persist() and
     // flushed here rather than lost.

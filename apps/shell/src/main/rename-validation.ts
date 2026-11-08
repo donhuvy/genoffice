@@ -1,7 +1,7 @@
 import { statSync } from 'node:fs'
 
 /** Name characters Windows forbids (plus controls). Mirrors the PDF
-    auto-renamer set (apps/pdf/src/main/pdf-main.ts) — the Home rename gate
+    auto-renamer set (apps/pdf/src/main/pdf-main.ts) - the Home rename gate
     must reject them with a localized error instead of letting renameSync
     throw a raw OS error. */
 // eslint-disable-next-line no-control-regex -- the C0 range IS the check: Windows forbids controls in names.

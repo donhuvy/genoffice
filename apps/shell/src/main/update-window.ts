@@ -4,12 +4,12 @@ import type { UpdateUiState } from '../shared/update-api'
 import { UPDATE_CHANNELS } from '../shared/update-api'
 
 /**
- * The update window: a frameless card centered over the shell window —
+ * The update window: a frameless card centered over the shell window -
  * non-modal since the settings entry landed, so it never blocks work; its
  * "minimize" action folds it away and Settings → About re-opens it on demand.
  * Content lives in renderer/update.html; this module owns the window
  * lifecycle, the pushed UI state, and the download / install / later IPC
- * surface, plus the settings-facing get-state / open-for-update entry — the
+ * surface, plus the settings-facing get-state / open-for-update entry - the
  * last two are registered at module load, since the shell window invokes them
  * before any update is known (see registerSettingsIpc).
  */
@@ -48,8 +48,8 @@ function broadcastState(): void {
 
 /**
  * The two channels the shell window invokes from Settings → About. That call
- * happens on mount — long before any update is known, which on a fresh launch
- * is every launch — so these cannot live behind showUpdateWindow: a handler
+ * happens on mount - long before any update is known, which on a fresh launch
+ * is every launch - so these cannot live behind showUpdateWindow: a handler
  * that only exists once the dialog has opened cannot answer the very first
  * invoke, and ipcRenderer.invoke rejects with "No handler registered".
  * currentState is null until the updater reports something, and null is the
@@ -61,7 +61,7 @@ function registerSettingsIpc(): void {
   ipcMain.handle(UPDATE_CHANNELS.getState, () => currentState)
   // Settings → About "update to vX": surface the dialog again (it may have
   // been minimized) and, when nothing has started yet, start the download.
-  // Returns false while no update is known — the settings button stays
+  // Returns false while no update is known - the settings button stays
   // hidden in that state, so callers treat it as a no-op.
   ipcMain.handle(UPDATE_CHANNELS.openForUpdate, (): boolean => {
     if (!currentState) return false

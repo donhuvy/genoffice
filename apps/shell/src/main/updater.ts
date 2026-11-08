@@ -27,17 +27,17 @@ import {
  * The release pipeline publishes `latest.yml` + the versioned installer to
  * the update channel prefix (production builds only). The packaged app reads
  * that URL from resources/app-update.yml, which electron-builder bakes in
- * from the `publish` config in apps/shell/electron-builder.cjs — the URL
+ * from the `publish` config in apps/shell/electron-builder.cjs - the URL
  * itself is injected at build time via the GENOFFICE_UPDATE_URL env var and
  * is intentionally not committed to the repo.
  *
  * UX is the strong-guidance modal card (update-window.ts), not a native
  * dialog. Windows updates through the NSIS installer (latest.yml); macOS
  * through the zip target (latest-mac.yml); Linux through the AppImage
- * target (latest-linux.yml) — all published by the internal release
+ * target (latest-linux.yml) - all published by the internal release
  * pipeline. On Linux only AppImage runs self-update (electron-updater
  * replaces the .AppImage file in place, no root needed); deb installs have
- * no updater — users upgrade via `apt install ./<new>.deb`.
+ * no updater - users upgrade via `apt install ./<new>.deb`.
  *
  * Dev preview: GENOFFICE_FAKE_UPDATE=<version> in an unpacked run opens the
  * window with a simulated download so the UI can be exercised end to end.
@@ -420,7 +420,7 @@ const RECHECK_INTERVAL_MS = 4 * 60 * 60 * 1000
 
 // After this many failed download/apply attempts for the same version the
 // dialog stops offering "retry" and guides the user to a manual download
-// instead. Covers permanently broken update paths — most importantly a
+// instead. Covers permanently broken update paths - most importantly a
 // code-signing identity (Apple Team ID) change, which Squirrel.Mac rejects
 // on every retry while the error looks like a download failure to the user.
 const MANUAL_FALLBACK_AFTER = 2
@@ -487,7 +487,7 @@ function manualDownloadUrlFor(info: UpdateInfo): string | null {
 }
 
 let started = false
-// version the user declined this session — don't nag again until next launch
+// version the user declined this session - don't nag again until next launch
 let dismissedVersion: string | null = null
 // re-shows the GENOFFICE_FAKE_UPDATE window so the manual check is
 // exercisable in dev runs too
@@ -507,8 +507,8 @@ let updaterActive = false
 
 // The check in flight is quiet when a background timer started it: the package
 // then downloads in the background and the app installs it when it quits
-// (genoffice#2389). A check the user asked for — the Help entry, the About
-// dialog button, a channel switch — opens the update card instead.
+// (genoffice#2389). A check the user asked for - the Help entry, the About
+// dialog button, a channel switch - opens the update card instead.
 let quietCheck = false
 
 function log(...args: unknown[]): void {
@@ -559,7 +559,7 @@ export function applyUpdateChannel(channel: UpdateChannel): void {
 /** User-triggered check (Help > Check for Updates… / the About dialog button).
  * Unlike the silent launch/periodic checks, every outcome gets explicit
  * feedback: an available update opens the standard update window (even a
- * version dismissed with "later" this session — the user just asked for it),
+ * version dismissed with "later" this session - the user just asked for it),
  * up-to-date and failure each get a dialog, and installs with no self-update
  * mechanism (dev runs, Linux .deb) are pointed at the download page instead
  * of being told they're current. */
@@ -640,7 +640,7 @@ export function initAutoUpdater(
   // Unpacked runs have no app-update.yml and must not hit the CDN with a
   // dev version. Windows updates via NSIS (latest.yml), macOS via the zip
   // target + latest-mac.yml (Squirrel.Mac requires a signed, notarized app
-  // — dmg is first-install only), Linux via the AppImage target +
+  // - dmg is first-install only), Linux via the AppImage target +
   // latest-linux.yml. On Linux the updater only works for AppImage runs
   // (electron-updater's AppImageUpdater needs the APPIMAGE env var the
   // AppImage runtime sets); deb installs update manually via apt.
@@ -785,7 +785,7 @@ export function initAutoUpdater(
       return
     }
     // a periodic recheck resolving to the version the open dialog already
-    // shows must not reset its phase to 'available' — that would wipe an
+    // shows must not reset its phase to 'available' - that would wipe an
     // in-progress download or a terminal 'manual' fallback back to the
     // "Update Now" offer
     if (sameVersionRecheck && isUpdateWindowOpen()) return

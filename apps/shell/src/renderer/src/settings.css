@@ -1,5 +1,5 @@
 /* Settings modal (opened from the account menu): two-pane dialog matched to
-   GenMail's settings window (values read from its packaged CSS) — borderless
+   GenMail's settings window (values read from its packaged CSS) - borderless
    header/nav, label-left / control-right rows with hairline dividers.
    Chrome colors use semantic tokens only (see CLAUDE.md theming rules). */
 
@@ -263,7 +263,7 @@
   background: var(--danger);
 }
 
-/* MCP pane: client config example — heading row with the copy button, then the
+/* MCP pane: client config example - heading row with the copy button, then the
    snippet on its own full-width row (a side-by-side flex row squeezes the
    tall snippet against the button) */
 .set-config-block {
@@ -304,7 +304,7 @@
   user-select: text;
 }
 
-/* MCP pane: in-pane log viewer — fixed height, scrolls, follows the tail */
+/* MCP pane: in-pane log viewer - fixed height, scrolls, follows the tail */
 .set-log {
   max-height: 240px;
   overflow-y: auto;

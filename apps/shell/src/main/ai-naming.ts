@@ -22,7 +22,7 @@ const MAX_NAME_LENGTH = 60
  * `reasoning_content` and not one content token (measured 2026-10-31; the same
  * prompt with 200 tokens thought for ~130 and then named the document). A starved
  * call "succeeds" with an empty answer, which the callers treat as "keep the name
- * the document had" — so the button silently did nothing. 2048 leaves room for a
+ * the document had" - so the button silently did nothing. 2048 leaves room for a
  * thinking preamble plus the name while staying a trivially cheap one-shot call;
  * a non-thinking model still stops after a dozen tokens, because the budget is a
  * ceiling, not a target.
@@ -66,12 +66,12 @@ export function sanitizeFileStem(raw: string): string {
     raw
       // models like to answer with a path, a bullet, or a quoted title
       .replace(/[\r\n]+/g, ' ')
-      .replace(/^[\s"'`#*\-–—•>]+/, '')
+      .replace(/^[\s"'`#*\-–-•>]+/, '')
       .replace(/["'`]+$/, '')
       // keep the last path segment: the stem is what lands next to the real dir
       .split(/[/\\]/)
       .pop() ?? ''
-  // drop an extension the model volunteered — the caller appends the real
+  // drop an extension the model volunteered - the caller appends the real
   // one. A name that is *only* an extension (".env") is left alone: there is
   // no stem to keep, and stripping it would empty the name.
   if (/^[^.]{2,}\.[A-Za-z0-9]{1,8}$/.test(name) || /^.{3,}\.[A-Za-z0-9]{1,8}$/.test(name)) {

@@ -6,7 +6,7 @@ import type { SheetsControl } from './tools/sheets-tools'
  * Shell-main half of the MCP → sheets-grid bridge.
  *
  * A sheets workbook lives in the **renderer** (Univer), so unlike slides this
- * needs a request/response channel into the tab — the same plumbing as the docs
+ * needs a request/response channel into the tab - the same plumbing as the docs
  * bridge. This module waits for a tab's renderer to announce itself
  * (`sheets:mcp-ready`, sent once the workbook is mounted), pushes one command
  * at a time over `sheets:mcp-command`, and resolves the matching

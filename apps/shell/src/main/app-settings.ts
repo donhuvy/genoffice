@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto'
 import { readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs'
 
 /**
- * Helpers for userData/app-settings.json — a flat JSON object holding
+ * Helpers for userData/app-settings.json - a flat JSON object holding
  * cross-module app preferences (UI language, first-run onboarding flag).
  * Editor modules read the same file, so the shape must stay a plain object.
  */

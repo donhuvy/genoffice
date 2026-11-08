@@ -26,7 +26,7 @@ import type { FoundSkill, RecommendedSkill } from '../shared/found-skill'
  * coding agent's directories: a developer's `.claude` holds git, test and
  * deploy skills, and a word processor offering those as candidates was noise
  * for developers and an empty panel for everyone else. A skill arrives here
- * one way — the user picks a folder or a zip and presses Import.
+ * one way - the user picks a folder or a zip and presses Import.
  */
 
 export type { FoundSkill }
@@ -330,7 +330,7 @@ export function removeSkill(name: string, userDataDir: string): void {
  *
  * `readSkillBody` takes a path from the renderer, so on its own it reads any
  * file on disk. The name must be SKILL.md and its directory's directory must
- * be the skills root — the exact shape `usableSkills` builds, so what can be
+ * be the skills root - the exact shape `usableSkills` builds, so what can be
  * read and what was listed are the same set. `dirname` never collapses `..`,
  * so an escaping path keeps its `..` and cannot match the resolved root.
  */
@@ -356,7 +356,7 @@ export function skillVersion(path: string): string {
  *
  * Shipping them is not installing them: a recommended skill only runs after
  * the user presses Install, which copies it into our folder like any import.
- * Installed copies are the user's — they may edit them — so an update is
+ * Installed copies are the user's - they may edit them - so an update is
  * offered, never applied on its own.
  */
 export async function recommendedSkills(
@@ -392,7 +392,7 @@ export async function recommendedSkills(
   }
   // the frontmatter descriptions are English; locales/<uiLang>.json carries the
   // per-language ones, so the Recommended list speaks the UI's language. 'en'
-  // has no file — the frontmatter is the English source.
+  // has no file - the frontmatter is the English source.
   for (const [name, description] of Object.entries(recommendedDescriptions(recommendedDir))) {
     const skill = out.find((s) => s.name === name)
     if (skill && typeof description === 'string' && description) skill.description = description

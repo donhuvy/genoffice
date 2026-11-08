@@ -4,7 +4,7 @@
  * The naming service used to carry its own list of provider ids and read the
  * key out of the settings file. That was the wrong answer twice over: the list
  * did not know every provider the build can talk to, and it never saw the
- * Genspark key, which lives in the login state rather than in the file — so
+ * Genspark key, which lives in the login state rather than in the file - so
  * for the default account the call failed and the feature quietly did nothing.
  *
  * This module resolves the provider the way the rest of the app does: the

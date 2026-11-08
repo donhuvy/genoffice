@@ -13,7 +13,7 @@ import {
 /**
  * Local log for the MCP server: a bounded in-memory ring plus an append-only
  * file under userData, so both the settings UI (recent lines) and a saved file
- * the user can open/share are covered. Appending is synchronous on purpose —
+ * the user can open/share are covered. Appending is synchronous on purpose -
  * log volume is tiny (lifecycle, sessions, tool calls) and a lost line on
  * crash is acceptable, while ordering guarantees are not.
  */

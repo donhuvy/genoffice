@@ -128,7 +128,7 @@ export async function readDocxPropertiesViaCli(
 /**
  * `merge <template> --data <staged json> --out <target> [--force] [--strict]`:
  * fill one record of `{{key}}` placeholders and write the result. The data
- * object is staged to a temp file — inline JSON on argv would run into
+ * object is staged to a temp file - inline JSON on argv would run into
  * Windows' command-line length limit for real merge payloads.
  */
 export async function mergeTemplateViaCli(
@@ -164,7 +164,7 @@ export async function mergeTemplateViaCli(
 /**
  * `sheet links <path>`: list, refresh (`--update`) or break (`--break`, 1-based
  * indices) a workbook's external links. Mutations default to writing in place
- * and honour `--out`/`--force` — the CLI routes them through the same
+ * and honour `--out`/`--force` - the CLI routes them through the same
  * output/allow-list/open-in-GenOffice guards `sheet apply` uses.
  */
 export async function sheetLinksViaCli(

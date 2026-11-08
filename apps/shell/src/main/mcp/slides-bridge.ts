@@ -48,7 +48,7 @@ async function waitSession(wcId: number): Promise<Session> {
 function requireSession(wcId: number): Session {
   const session = sessions.get(wcId)
   if (!session) {
-    throw new Error('the deck session is gone — its tab was closed; call create_session again')
+    throw new Error('the deck session is gone - its tab was closed; call create_session again')
   }
   return session
 }
@@ -58,7 +58,7 @@ function requireSession(wcId: number): Session {
  *
  * Group children carry the group's child coordinate system, not document-space
  * EMU, so their box is reported as `local` (with the parent's own box alongside)
- * instead of being passed off as an absolute position — an agent placing a
+ * instead of being passed off as an absolute position - an agent placing a
  * follow-up setTransform needs to know which frame it is addressing.
  */
 function elementInfo(el: SlideElement): Record<string, unknown> {
@@ -146,10 +146,10 @@ export function createSlidesControl(deps: SlidesBridgeDeps): SlidesControl {
     runTxn: async (wcId: number, req: SlidesTxnRequest) => {
       const session = requireSession(wcId)
       const result = applySessionTxn(session, req as Parameters<typeof applySessionTxn>[1])
-      if (!result) throw new Error('the deck session is gone — call create_session again')
+      if (!result) throw new Error('the deck session is gone - call create_session again')
       // The ordinary `slides:apply-txn` path has an originating renderer that
       // applies its own IPC return value; MCP runs in the main process, so the
-      // tab would never hear about the change — scheduleDeckBroadcast no-ops
+      // tab would never hear about the change - scheduleDeckBroadcast no-ops
       // for single-window sessions. Push the fresh render to the tab ourselves
       // (multi-window sessions already get the scheduled broadcast).
       if (result.applied && result.slides) {

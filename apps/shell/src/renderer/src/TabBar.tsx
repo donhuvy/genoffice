@@ -253,7 +253,7 @@ export function TabBar() {
     width: number
   } | null>(null)
   // a detached window is being dragged over the strip: insertion indicator x
-  // (strip-relative) — the main process asks, this strip answers with the slot
+  // (strip-relative) - the main process asks, this strip answers with the slot
   const [dockX, setDockX] = useState<number | null>(null)
 
   const tabRects = () =>
@@ -287,7 +287,7 @@ export function TabBar() {
       // optimistic local reorder so clearing the transforms causes no flash;
       // the main-process broadcast arrives with the identical order
       setTabs((prev) => {
-        // look the tab up by id — the list may have changed mid-drag (e.g.
+        // look the tab up by id - the list may have changed mid-drag (e.g.
         // Cmd+W), which would make the indices captured at pointer-down stale
         const fromIdx = prev.findIndex((tb) => tb.id === drag.id)
         if (fromIdx < 0) return prev
@@ -314,7 +314,7 @@ export function TabBar() {
   }, [])
 
   // if the dragged tab is closed mid-drag (e.g. Cmd+W) its element unmounts
-  // and pointerup/pointercancel never fire — clear the drag state ourselves
+  // and pointerup/pointercancel never fire - clear the drag state ourselves
   useEffect(() => {
     const drag = dragRef.current
     // a torn-off tab leaves the list by design and its drag goes on
@@ -363,7 +363,7 @@ export function TabBar() {
     if (!drag.started) {
       if (Math.abs(dx) < 4 && Math.abs(event.clientY - (drag.stripTop + drag.stripBottom) / 2) < 4)
         return
-      // re-sample geometry the moment the drag really starts — the
+      // re-sample geometry the moment the drag really starts - the
       // pointer-down activation re-renders and could have moved tabs
       const rects = tabRects()
       drag.lefts = rects.map((r) => r.left)
@@ -438,10 +438,10 @@ export function TabBar() {
     return () => strip.removeEventListener('wheel', onWheel)
   }, [])
 
-  // keep the active tab in view — new tabs open at the far end of the strip
+  // keep the active tab in view - new tabs open at the far end of the strip
   const activeId = tabs.find((tab) => tab.active)?.id
   useEffect(() => {
-    // pointer-down activation runs while the user is pressing that tab — it is
+    // pointer-down activation runs while the user is pressing that tab - it is
     // already visible, and scrolling the strip mid-press would invalidate the
     // drag geometry sampled at pointer-down
     if (dragRef.current) return
@@ -503,7 +503,7 @@ export function TabBar() {
             <div
               key={tab.id}
               className={`tab-item ${tab.kind === 'home' ? 'tab-home' : ''} ${tab.active ? 'active' : ''} ${tab.dormant ? 'tab-dormant' : ''} ${dragVisual?.id === tab.id ? 'drag-source' : ''}`}
-              // long file names ellipsize in the strip — hover reveals the
+              // long file names ellipsize in the strip - hover reveals the
               // full title and where the file is (the close button's own tooltip still wins there)
               title={
                 tab.dormant
@@ -573,7 +573,7 @@ export function TabBar() {
                 strip.setPointerCapture(event.pointerId)
               }}
             >
-              {/* highlight plate behind the content — hover capsule / active white body */}
+              {/* highlight plate behind the content - hover capsule / active white body */}
               <span className="tab-plate" aria-hidden="true" />
               <span className="tab-icon">{KIND_ICON[tab.kind]}</span>
               {renaming?.id === tab.id ? (

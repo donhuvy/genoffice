@@ -414,7 +414,7 @@ import { isUpdateChannel, type UpdateChannel } from '../shared/update-api'
 /**
  * GenOffice unified shell: ONE Electron app, ONE BrowserWindow, hosting the
  * docs and sheets modules as WebContentsView tabs behind a WPS-style tab
- * strip. The shell owns the lifecycle — single-instance lock, file-
+ * strip. The shell owns the lifecycle - single-instance lock, file-
  * association routing by extension, and per-active-tab menu switching.
  * Renderers load from each module's build output (apps/docs/out,
  * apps/sheets/out), so build those before running the shell.
@@ -432,7 +432,7 @@ for (const stream of [process.stdout, process.stderr]) {
 }
 
 // ANY unpacked run (`npm run shell`, `npm run dev`, `npx electron .`) must not
-// share the installed app's userData or single-instance lock — otherwise a dev
+// share the installed app's userData or single-instance lock - otherwise a dev
 // run silently quits and forwards its argv to the running installed GenOffice.
 // GENOFFICE_USER_DATA: test drivers point this at a scratch dir so an
 // automated instance can run alongside the dev instance (separate lock).
@@ -444,7 +444,7 @@ if (!app.isPackaged) {
     // unquoted shell expansions, rsync targets and .desktop Exec= lines, and
     // XDG config entries are single tokens (genoffice#1817). "GenOffice-Dev" keeps the
     // family naming of the packaged profile ("GenOffice"). The old directory
-    // moves once — it sits on the same volume as appData, so the rename is
+    // moves once - it sits on the same volume as appData, so the rename is
     // atomic, and a concurrent dev instance keeps its open file handles.
     const appData = app.getPath('appData')
     const devDir = join(appData, 'GenOffice-Dev')
@@ -807,7 +807,7 @@ function recordStarPromptDocOpen(): void {
 }
 
 // Stargazer count for the settings About pane; fetched main-side (the
-// renderer CSP has no api.github.com) and cached per session — the exact
+// renderer CSP has no api.github.com) and cached per session - the exact
 // number is decoration, staleness is fine.
 let cachedGithubStars: number | null = null
 
@@ -3916,7 +3916,7 @@ function ensureFolderWatchers(): void {
  * Put the manual in whatever menu is currently installed.
  *
  * Every tab kind builds its own application menu, which is how File and Edit
- * stay tab-shaped — and which is also why an item added to one builder is
+ * stay tab-shaped - and which is also why an item added to one builder is
  * missing from the other six. F1 worked from Home and nowhere else, and the
  * manual's own shortcut table was wrong for six of the seven tab kinds.
  *
@@ -3934,7 +3934,7 @@ function withUserGuide(): void {
   }
   const help = menu.items.find((item) => item.role === 'help')
   // Slides and Sheets build a File/Edit/View template with no Help menu at
-  // all, so there is nothing to insert into — one is created instead. Without
+  // all, so there is nothing to insert into - one is created instead. Without
   // this the manual would be reachable from four of the seven tab kinds.
   if (!help) {
     menu.append(
@@ -3945,7 +3945,7 @@ function withUserGuide(): void {
   }
   const submenu = help.submenu
   if (!submenu || submenu.items.some((i) => i.accelerator === 'F1')) return
-  // A separator survives a template only *between* two real items — Electron
+  // A separator survives a template only *between* two real items - Electron
   // drops one at either end, so `[userGuide, separator]` builds a single item
   // and the destructure below used to hand `undefined` to `insert`, which threw
   // "Invalid item" and took the main process down on the next tab switch. The
@@ -4023,7 +4023,7 @@ function viewMenuTemplate(): MenuItemConstructorOptions {
  * Interface-scale items in the View menu of every tab kind. Editor menus are
  * built in the editor apps (docs/sheets/slides) or by the three shell-owned
  * builders, so rather than teaching seven menu builders about the scale, the
- * current menu is post-processed here — the same shape as withUserGuide below.
+ * current menu is post-processed here - the same shape as withUserGuide below.
  * An existing View menu (docs, slides: document zoom) gains the items after a
  * separator; the rest get a fresh View menu inserted before the Help menu that
  * withUserGuide has just guaranteed.
@@ -4055,7 +4055,7 @@ function withViewMenu(): void {
 let currentUiScale = 1
 
 /**
- * Stamp the stored interface scale into every renderer — now, and for any
+ * Stamp the stored interface scale into every renderer - now, and for any
  * window created later.
  *
  * `web-contents-created` is the hook that covers all three window kinds at
@@ -4070,7 +4070,7 @@ function installUiScale(): void {
   })
   applyUiScaleToAll(currentUiScale)
   // A scale change moves the tab strip, so the editor views below it have to
-  // move too — and the Windows/Linux caption band is sized from it.
+  // move too - and the Windows/Linux caption band is sized from it.
   onUiScaleChanged((scale) => {
     currentUiScale = scale
     tabManager?.layout()
@@ -4133,13 +4133,13 @@ function createShellWindow(): void {
   nativeTheme.on('updated', refreshTitleBarOverlay)
   win.once('closed', () => nativeTheme.off('updated', refreshTitleBarOverlay))
   // dragging the window by the tab strip's blank (draggable) area produces no
-  // DOM event anywhere — will-move is the only signal to dismiss popovers
+  // DOM event anywhere - will-move is the only signal to dismiss popovers
   win.on('will-move', () => broadcastChromePressed())
   // remember the window's position and size for the next launch (issue #2049)
   installShellWindowBoundsPersistence(APP_SETTINGS_PATH(), win)
   // A detached editor window claims the process-global menu/active-editor targets
   // while focused; take them back when the shell window regains focus. Keyboard
-  // focus must land back on the active tab's view too — regaining window focus
+  // focus must land back on the active tab's view too - regaining window focus
   // gives it to the chrome webContents, leaving typing dead in the document.
   win.on('focus', () => {
     tabManager?.refreshActiveTargets()
@@ -4280,7 +4280,7 @@ function createShellWindow(): void {
   })
   // ⌘O / open-path inside a docs tab: sync the tab title immediately, same
   // contract as the sheets/slides opened hooks (a plain save to the original
-  // path never renames the tab, so the open must — r115)
+  // path never renames the tab, so the open must - r115)
   setDocsFileOpenedHook((wcId, path) => {
     manager.setTabFileFor(wcId, path)
     detachedSetFileFor(wcId, path)
@@ -4443,7 +4443,7 @@ function openDocumentPath(filePath: string): boolean {
   const opened = routeDocumentPath(filePath)
   if (opened) {
     recordStarPromptDocOpen()
-    // extension only — never the file name or path
+    // extension only - never the file name or path
     analytics.track('file_open', { ext: extname(filePath).slice(1).toLowerCase() })
   }
   return opened
@@ -4453,7 +4453,7 @@ function openDocumentPath(filePath: string): boolean {
  * Open a just-written export. Unlike File > Open, an already-open PDF tab is
  * reloaded from disk so a re-export to the same path shows the new bytes
  * instead of the previous in-memory document (which may also hold unsaved
- * annotations). In-memory edits on that tab are discarded — Save would
+ * annotations). In-memory edits on that tab are discarded - Save would
  * overwrite the file we just exported.
  */
 function openGeneratedDocument(filePath: string): boolean {
@@ -4470,7 +4470,7 @@ function openGeneratedDocument(filePath: string): boolean {
 
 function routeDocumentPath(filePath: string): boolean {
   if (!existsSync(filePath)) return false
-  // a detached editor window already shows this file — focus it, never a second copy
+  // a detached editor window already shows this file - focus it, never a second copy
   if (focusDetachedByPath(filePath)) return true
   if (!tabManager) return false
   if (DOCX_RE.test(filePath)) {
@@ -4531,7 +4531,7 @@ function routeDocumentPath(filePath: string): boolean {
  * "New spreadsheet" no longer drops a file in the default folder up front: the
  * blank workbook is created in a temp directory and its first Save goes through
  * Save As (the same path an .xls/.tsv import takes), so a new tab that is
- * closed without saving leaves nothing behind to delete by hand — the temp
+ * closed without saving leaves nothing behind to delete by hand - the temp
  * directory is discarded with the session. The save pipeline still needs a real
  * file to edit, hence the backing workbook rather than the in-memory blank grid.
  * Falls back to a file in the default folder, then to the in-memory blank tab.
@@ -4571,7 +4571,7 @@ async function newSheetTab(recoverAs?: string): Promise<void> {
       await atomicWriteFile(suggestedPath, await blankXlsxBuffer())
       markSheetsUntitledPath(suggestedPath)
       // route directly (not via openDocumentPath) so creating a sheet emits
-      // only file_new — the file_open event is reserved for opening existing files
+      // only file_new - the file_open event is reserved for opening existing files
       if (routeDocumentPath(suggestedPath)) recordStarPromptDocOpen()
       analytics.track('file_new', { kind: 'xlsx' })
     } catch (fallbackErr) {
@@ -4591,7 +4591,7 @@ async function newSheetTab(recoverAs?: string): Promise<void> {
 /**
  * A throw anywhere in the create-tab path (view creation, sidecar resolution,
  * renderer load) used to be swallowed by `void`-ed promises and ipc-invoke
- * rejections, so the click looked like a pure no-op — the exact "AI Sheets /
+ * rejections, so the click looked like a pure no-op - the exact "AI Sheets /
  * AI Slides do nothing" alpha report. Surface the failure instead.
  */
 function surfaceNewTabError(err: unknown): void {
@@ -4625,7 +4625,7 @@ function openBlankDocsTabForMcp(): number {
  * MCP: open a blank sheets tab and return its webContents id, for the
  * visible-grid bridge. Like the app's own "new spreadsheet", a real blank
  * .xlsx is created up front (the save pipeline needs an on-disk workbook;
- * the fallback in-memory demo grid cannot save) — but the AI auto-rename
+ * the fallback in-memory demo grid cannot save) - but the AI auto-rename
  * marking is skipped, the file name is the agent's business.
  */
 async function openBlankSheetsTabForMcp(): Promise<number> {
@@ -4662,7 +4662,7 @@ const mcpBlankSheetPaths = new Map<number, string>()
  * MCP: drop a blank sheets tab whose session never became ready, and delete the
  * empty workbook created for it. Without this a failed `create_session` leaves
  * an orphan tab plus an .xlsx in the default save folder that the user never
- * asked for — and nothing in the MCP surface can clean either one up.
+ * asked for - and nothing in the MCP surface can clean either one up.
  */
 function abandonBlankSheetsTabForMcp(wcId: number): void {
   const manager = tabManager
@@ -4741,7 +4741,7 @@ function newHtmlTab(): void {
 
 /**
  * "New PDF" creates a blank single-page .pdf in the default folder up front and
- * opens it as a regular file tab — the PDF module has no in-memory blank mode
+ * opens it as a regular file tab - the PDF module has no in-memory blank mode
  * (openPdfTab requires a path), same pattern as the blank workbook above.
  */
 async function newPdfTab(): Promise<void> {
@@ -4751,7 +4751,7 @@ async function newPdfTab(): Promise<void> {
     // Opt the file into content-derived auto-naming on its first save
     markPdfUntitledPath(filePath)
     // route directly (not via openDocumentPath) so creating a pdf emits only
-    // file_new and counts one doc-open — same as the blank workbook above
+    // file_new and counts one doc-open - same as the blank workbook above
     if (routeDocumentPath(filePath)) recordStarPromptDocOpen()
     analytics.track('file_new', { kind: 'pdf' })
   } catch (err) {
@@ -4764,7 +4764,7 @@ async function newPdfTab(): Promise<void> {
  * mounting (seconds on cold start), so a single 'open' can fire into the
  * void. Re-send until the queued workbook is consumed; consumption clears the
  * queue entry main-side (sheets-main), which stops the loop. The nudge only
- * reaches the active tab, so it gates on that tab's own queue entry —
+ * reaches the active tab, so it gates on that tab's own queue entry -
  * background tabs from a multi-select Open pull their path themselves via the
  * renderer's has-queued-workbook poll.
  */
@@ -4874,7 +4874,7 @@ function registerHomeIpc(): void {
 
   // Knowledge-base channel: the AI-side read access to the reader's starred
   // files (docs wires these into its panel; see knowledge-base.ts). Path
-  // arguments are validated against the starred set — a corpus file is the
+  // arguments are validated against the starred set - a corpus file is the
   // only thing a knowledge tool may read.
   ipcMain.handle('kb:list', (): unknown => listKnowledgeFiles(readStarredFiles()))
 
@@ -5106,7 +5106,7 @@ function registerHomeIpc(): void {
   })
 
   // Bulk unstar from the Starred view: every row there is a favorite, so the
-  // selection action is "unstar", not "remove from recents" — removeRecent
+  // selection action is "unstar", not "remove from recents" - removeRecent
   // keeps existing files' stars on purpose, which made the Starred view's
   // bulk removal a no-op for anything still on disk
   ipcMain.handle(HOME_CHANNELS.unstarPaths, (_event, paths: unknown) => {
@@ -5171,7 +5171,7 @@ function registerHomeIpc(): void {
       }
     }
     removeRecentFiles(list)
-    // the files were deliberately destroyed — stars must not survive as ghosts
+    // the files were deliberately destroyed - stars must not survive as ghosts
     removeStarredFiles(list)
   })
 
@@ -5262,7 +5262,7 @@ function registerHomeIpc(): void {
     if (theme === currentDocTheme()) return
     cachedDocTheme = theme
     writeAppSetting(APP_SETTINGS_PATH(), 'documentTheme', theme)
-    // the native theme is untouched — only the editors' canvas/paper follows this
+    // the native theme is untouched - only the editors' canvas/paper follows this
     for (const wc of webContents.getAllWebContents()) wc.send('app:document-theme-changed', theme)
   })
 
@@ -5658,7 +5658,7 @@ function registerHomeIpc(): void {
 
   ipcMain.handle(HOME_CHANNELS.starPromptAction, (_event, action: unknown) => {
     if (action !== 'starred' && action !== 'later') return
-    // the card was reacted to — drop the session grant so a later query (new
+    // the card was reacted to - drop the session grant so a later query (new
     // shell window on macOS) re-evaluates the real rules (snooze / resolved)
     starPromptSessionGrant = null
     // 'later' needs no write: the display was already counted by the query
@@ -5684,7 +5684,7 @@ function stringPaths(value: unknown): string[] {
 }
 
 // electron-vite emits ?asset files under hashed names, which breaks nativeImage's
-// automatic `@2x` sibling lookup — attach the retina representation by hand
+// automatic `@2x` sibling lookup - attach the retina representation by hand
 function loadMenuIcon(path1x: string, path2x: string): NativeImage {
   const icon = nativeImage.createFromPath(path1x)
   icon.addRepresentation({ scaleFactor: 2, buffer: readFileSync(path2x) })
@@ -5727,7 +5727,7 @@ const TAB_MENU_ICON: Record<TabKind, keyof MenuIconSet> = {
 }
 
 // tab views see neither DOM events nor a focus change when the user clicks the
-// shell chrome — relay the press so open popovers in documents can dismiss.
+// shell chrome - relay the press so open popovers in documents can dismiss.
 // The pressed document must be excluded: it already dismissed (or is opening)
 // its own popovers via its local pointerdown listeners, and the async IPC
 // round-trip would otherwise close a popover that very press just opened
@@ -5747,7 +5747,7 @@ function ensureTabManager(): TabManager {
 }
 
 /** "Open in New Window": reparent the tab's live view into a detached editor
- *  window — the document moves as-is, unsaved edits included. */
+ *  window - the document moves as-is, unsaved edits included. */
 function detachTabToWindow(id: string): void {
   if (!tabManager) return
   const record = tabManager.detachTab(id)
@@ -5786,7 +5786,7 @@ function activePdfTarget() {
 
 /** ⌘W / File > Close targets the focused window: a detached editor closes
  *  itself (its own unsaved-changes guard runs), otherwise the shell's active tab
- *  — the same rule the docs / sheets / slides close hooks follow */
+ *  - the same rule the docs / sheets / slides close hooks follow */
 function closeFocusedEditor(): void {
   const focused = BrowserWindow.getFocusedWindow()
   if (focused && focused !== shellWindow && isDetachedEditorWindow(focused)) focused.close()
@@ -5909,7 +5909,7 @@ function registerTabsIpc(): void {
   ipcMain.handle(TABS_CHANNELS.reorder, (_event, id: string, toIndex: number) => {
     if (typeof id === 'string' && Number.isInteger(toIndex)) tabManager?.reorderTab(id, toIndex)
   })
-  // "all tabs" overflow menu — native popup because the editors' WebContentsView
+  // "all tabs" overflow menu - native popup because the editors' WebContentsView
   // would cover any DOM dropdown the shell renderer draws below the tab strip
   ipcMain.handle(TABS_CHANNELS.showAppMenu, (_event, x: unknown, y: unknown) => {
     if (!shellWindow) return
@@ -5961,7 +5961,7 @@ function registerTabsIpc(): void {
   ipcMain.on(TABS_CHANNELS.dockIndex, (_event, index: unknown) => {
     lastDockIndex = typeof index === 'number' && Number.isInteger(index) ? index : undefined
   })
-  // per-tab context menu — native for the same reason as the tab list above
+  // per-tab context menu - native for the same reason as the tab list above
   ipcMain.handle(TABS_CHANNELS.showTabMenu, (_event, id: unknown, x: unknown, y: unknown) => {
     if (!tabManager || !shellWindow || typeof id !== 'string') return
     const tab = tabManager.list().find((t) => t.id === id)
@@ -5982,7 +5982,7 @@ function registerTabsIpc(): void {
         : {}),
     })
   })
-  // "+" new-file menu — native for the same reason as the tab list above
+  // "+" new-file menu - native for the same reason as the tab list above
   ipcMain.handle(TABS_CHANNELS.showNewMenu, (_event, x: unknown, y: unknown) => {
     if (!tabManager || !shellWindow) return
     const menu = Menu.buildFromTemplate([
@@ -6529,7 +6529,7 @@ async function exportPdfAsDocxLocal(format: 'docx' | 'md' | 'html' = 'docx'): Pr
 
     // degrade transparency (plan §7.6 dual-track split): whole scan → say so
     // once; individual image-fallback pages → name them;
-    // OCR-recovered scans ('ocr') are SUCCESSES — announce the recovery (the
+    // OCR-recovered scans ('ocr') are SUCCESSES - announce the recovery (the
     // user should proofread machine-read text), never the image-export notice
     const ocrPages = result.pageResults.filter((r) => r.status === 'ocr').map((r) => r.page)
     const imagePages = result.pageResults
@@ -6589,7 +6589,7 @@ async function exportPdfAsDocxLocal(format: 'docx' | 'md' | 'html' = 'docx'): Pr
             ? tm('pdfDocxLocalEncryptedDetail')
             : err.code === 'unsupported'
               ? // certificate-based or otherwise unsupported security (FPDF
-                // error 5): a hard PDFium boundary — no password can open it
+                // error 5): a hard PDFium boundary - no password can open it
                 // locally, so the message must NOT suggest one (P24 C)
                 tm('pdfDocxLocalUnsupportedEncDetail')
               : tm('pdfDocxLocalCorruptDetail')
@@ -6884,7 +6884,7 @@ function installBackToHomeItems(): void {
 
 /** The Settings view lives in the Home tab, so every app's menu points here:
  *  ⌘, lands on it from anywhere in the suite. The window comes back first if
- *  it was hidden or minimized, and asking again re-opens the same panel —
+ *  it was hidden or minimized, and asking again re-opens the same panel -
  *  the renderer keeps one. */
 function openSettingsView(): void {
   const win = shellWindow ?? BrowserWindow.getFocusedWindow()
@@ -6946,7 +6946,7 @@ async function installMainProcessProxy(): Promise<void> {
   }
   if (!proxyUrl) return
   // spawned gsk CLI children (login/search/…) do their own fetch and never see
-  // the dispatcher below — forward the proxy to them via env
+  // the dispatcher below - forward the proxy to them via env
   setGskProxyUrl(proxyUrl)
   try {
     const { setGlobalDispatcher } = await import('undici')
@@ -6966,7 +6966,7 @@ let pendingLaunchPaths = collectLaunchPaths(process.argv)
 let controlServer: ControlServer | null = null
 
 // show() does not un-minimize, and on macOS ⌘W destroys the shell window while the
-// app keeps running — either way a file opened from Finder would land out of sight.
+// app keeps running - either way a file opened from Finder would land out of sight.
 function revealShellWindow(): void {
   if (!shellWindow) createShellWindow()
   if (shellWindow?.isMinimized()) shellWindow.restore()
@@ -6982,7 +6982,7 @@ function openLaunchPaths(paths: readonly string[]): void {
 
 // On macOS a file opened from Finder is not in argv; it arrives via the open-file event (before ready).
 // If another instance already holds the lock, this process exits, and the path must ride along in
-// the lock request's additionalData to the surviving instance — so the lock request is deferred
+// the lock request's additionalData to the surviving instance - so the lock request is deferred
 // until ready, after the path is known.
 app.on('open-file', (event, filePath) => {
   event.preventDefault()
@@ -7117,7 +7117,7 @@ app.whenReady().then(async () => {
     // Dev watch restart: electron-vite SIGTERMs the previous instance and spawns this
     // one immediately. Chromium turns that SIGTERM into a graceful quit (Node's
     // process.on('SIGTERM') never fires in the main process), and the quit can wedge
-    // in the close-confirmation flow — the zombie then keeps the single-instance lock,
+    // in the close-confirmation flow - the zombie then keeps the single-instance lock,
     // this instance quits, and electron-vite's on-close handler exits with it, killing
     // the renderer dev server (blank shell window until a manual dev restart).
     // The previous instance is doomed either way: kill it and take over the lock.

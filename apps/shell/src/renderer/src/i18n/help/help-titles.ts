@@ -1,8 +1,8 @@
 /**
  * Per-language titles for the manual's sidebar and article headings.
  *
- * The registry holds the structure — which topics exist, their group and order
- * — and this holds the words, one entry per UI language. They are separate
+ * The registry holds the structure - which topics exist, their group and order
+ * - and this holds the words, one entry per UI language. They are separate
  * because they change for different reasons and on different schedules: a new
  * topic lands in the registry, a new language lands here, and a language with
  * no body yet still needs a title so the sidebar never shows an empty row.

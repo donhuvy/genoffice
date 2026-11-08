@@ -1,7 +1,7 @@
 /**
  * Pure geometry shared by the tab strip renderer (tear-off gesture, dock
  * insertion indicator) and the main process (native window-drag docking).
- * No Electron or DOM imports so both sides — and unit tests — can use it.
+ * No Electron or DOM imports so both sides - and unit tests - can use it.
  */
 
 /** rendered height of the shell's tab strip (apps/shell/src/renderer/src/tabbar.css) */
@@ -12,7 +12,7 @@ export const TAB_STRIP_HEIGHT = 40
  *
  * The main process positions every editor view at `y = tabStripHeight()` so it
  * starts below the strip. When the strip is scaled but that number is not, a
- * 150% strip paints 20px down into the document — the exact clipping genoffice#1913
+ * 150% strip paints 20px down into the document - the exact clipping genoffice#1913
  * asks to avoid, and invisible until someone looks at the seam.
  */
 export function tabStripHeight(scale = 1): number {

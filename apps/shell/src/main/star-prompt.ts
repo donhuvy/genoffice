@@ -1,5 +1,5 @@
 /**
- * "Star us on GitHub" prompt lifecycle — pure state transitions over the
+ * "Star us on GitHub" prompt lifecycle - pure state transitions over the
  * `starPrompt` object persisted in userData/app-settings.json.
  *
  * Design: the prompt only appears after the user has demonstrably gotten
@@ -7,7 +7,7 @@
  * shows at most twice in a lifetime, and any explicit reaction ("go star" /
  * "already starred") resolves it permanently. We cannot detect whether the
  * user actually starred (that would need GitHub OAuth), so opening the repo
- * page counts as resolved — never nag someone who probably already clicked.
+ * page counts as resolved - never nag someone who probably already clicked.
  */
 
 export const STAR_PROMPT_KEY = 'starPrompt'
@@ -32,7 +32,7 @@ export interface StarPromptState {
   shownCount?: number
   /** ms epoch of the last display */
   lastShownAt?: number
-  /** true once the user reacted (went to GitHub / already starred) — never show again */
+  /** true once the user reacted (went to GitHub / already starred) - never show again */
   resolved?: boolean
 }
 
@@ -58,7 +58,7 @@ export function withFirstRun(state: StarPromptState, now: number): StarPromptSta
 }
 
 /**
- * A document was opened — counts toward the value-moment threshold, and past
+ * A document was opened - counts toward the value-moment threshold, and past
  * it: the prompt copy personalizes with the real count ("you've opened N
  * documents"). Stops once no prompt can ever show again.
  */
@@ -80,7 +80,7 @@ export function shouldShowStarPrompt(state: StarPromptState, now: number): boole
 /**
  * Whether this launch is the first one after an upgrade. Installs from before
  * version tracking have no recorded version; if such an install has already
- * completed onboarding it is an existing user upgrading into this feature —
+ * completed onboarding it is an existing user upgrading into this feature -
  * treat that as an upgrade too. Fresh installs (no version, no onboarding)
  * are not upgrades: they go through the regular value-moment gates.
  */

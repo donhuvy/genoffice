@@ -69,7 +69,7 @@ export interface DetachedTab {
 interface TabRecord {
   id: string
   kind: TabKind
-  /** null for the Home tab — it's rendered by the shell window's own webContents */
+  /** null for the Home tab - it's rendered by the shell window's own webContents */
   view: WebContentsView | null
   title: string
   filePath?: string
@@ -89,7 +89,7 @@ const HOME_ID = 'home'
  * Owns every open tab (Home + docs + sheets) inside the shell's single
  * BrowserWindow. Docs/sheets tabs are WebContentsView children of that
  * window; only the active one is visible at a time. Home has no view of its
- * own — hiding every other tab reveals the shell window's own content.
+ * own - hiding every other tab reveals the shell window's own content.
  */
 export class TabManager {
   private readonly tabs: TabRecord[] = [
@@ -97,7 +97,7 @@ export class TabManager {
   ]
   private activeId: string = HOME_ID
   private nextId = 1
-  /** tab whose page entered HTML fullscreen (e.g. slides slideshow) — its view covers the tab strip */
+  /** tab whose page entered HTML fullscreen (e.g. slides slideshow) - its view covers the tab strip */
   private htmlFullScreenId: string | null = null
   /** webContents ids whose view must cover the tab strip without HTML fullscreen
    *  (slides show: the window snaps via simpleFullScreen and asks for the bleed
@@ -137,7 +137,7 @@ export class TabManager {
       setImmediate(() => this.layout())
     })
     // Windows fires `restore` when a minimized window comes back from the taskbar,
-    // sometimes before the client bounds have settled — the same stale-geometry
+    // sometimes before the client bounds have settled - the same stale-geometry
     // race as Linux/X11 maximize (issue #15). Reconcile synchronously (the bounds
     // are usually already right) and once more on the next tick. Bounded: exactly
     // two layout passes per restore, no polling, no recurring timers.
@@ -203,7 +203,7 @@ export class TabManager {
       return { x: 0, y: 0, width, height }
     }
     // The strip is `zoom`ed by the interface scale, so its rendered height
-    // grows with it — positioning the view at the unscaled constant would paint
+    // grows with it - positioning the view at the unscaled constant would paint
     // the document underneath a taller tab strip.
     const strip = tabStripHeight(this.uiScale())
     return { x: 0, y: strip, width, height: Math.max(0, height - strip) }
@@ -245,7 +245,7 @@ export class TabManager {
     if (this.shellWindow.isDestroyed()) return
     const bounds = this.contentBounds()
     // A minimized or mid-restore window can report a degenerate client rect;
-    // applying it would shrink the active view to nothing — the white screen
+    // applying it would shrink the active view to nothing - the white screen
     // after a Windows taskbar restore. Keep the last good layout instead.
     if (!isSettledRect(bounds)) return
     const active = this.tabs.find((t) => t.id === this.activeId)
@@ -255,7 +255,7 @@ export class TabManager {
   /**
    * Re-fit the active view after the native window returns from the taskbar.
    * Deliberately narrower than activateTab: no visibility toggles, no focus,
-   * no menu, no onChanged — the active tab, its WebContentsView and every
+   * no menu, no onChanged - the active tab, its WebContentsView and every
    * other document stay exactly as they were.
    */
   reconcileAfterWindowRestore(): void {
@@ -286,7 +286,7 @@ export class TabManager {
    * and chrome-free Present tabs (a live preview of another tab's document, so
    * acting on it would double-count that document).
    *
-   * Dirtiness is resolved here per family because it is not uniform — five
+   * Dirtiness is resolved here per family because it is not uniform - five
    * families answer synchronously in the main process, docs has to ask its
    * renderer. Hence the async signature.
    */
@@ -333,7 +333,7 @@ export class TabManager {
   }
 
   /** The in-app user manual (issue #1520): a closable tab showing the shell
-      renderer's help mode — the same bundle, branched on ?mode=help, so no
+      renderer's help mode - the same bundle, branched on ?mode=help, so no
       second renderer build is needed. */
   openHelpTab(): string {
     // F1 again, or the Help menu while the manual is already open, focuses it
@@ -535,7 +535,7 @@ export class TabManager {
 
   /** Hand keyboard focus to the active tab's view. The click that opened or
    *  switched a tab lands on the chrome webContents (tab strip, Home list),
-   *  and a WebContentsView made visible does not take focus on its own — so
+   *  and a WebContentsView made visible does not take focus on its own - so
    *  without this, typing after every open/switch keeps going to a hidden
    *  view. Home has no view of its own; the shell window's webContents is
    *  the focus target there. Skipped while the window is unfocused
@@ -587,7 +587,7 @@ export class TabManager {
     return this.tabs.find((t) => t.view?.webContents.id === webContentsId)?.id
   }
 
-  /** a module opened a file inside an existing tab (⌘O / queued path) — sync title + dedupe path */
+  /** a module opened a file inside an existing tab (⌘O / queued path) - sync title + dedupe path */
   setTabFileFor(webContentsId: number, filePath: string): void {
     const tab = this.tabs.find((t) => t.view?.webContents.id === webContentsId)
     if (!tab) return
@@ -604,7 +604,7 @@ export class TabManager {
     this.onChanged()
   }
 
-  /** a file was renamed on disk (rename from the Home list) — sync any open tab's title/path;
+  /** a file was renamed on disk (rename from the Home list) - sync any open tab's title/path;
    *  returns the affected views so callers can notify the embedded editors */
   renameTabFile(
     oldPath: string,
@@ -660,7 +660,7 @@ export class TabManager {
       .map((t) => ({ id: t.id, webContents: t.view!.webContents }))
   }
 
-  /** all live docs tabs — dirtiness lives renderer-side, caller queries async (shell-close guard) */
+  /** all live docs tabs - dirtiness lives renderer-side, caller queries async (shell-close guard) */
   docsTabs(): Array<{ id: string; webContents: WebContents }> {
     return this.tabs
       .filter((t) => t.kind === 'docs' && t.view)
@@ -889,7 +889,7 @@ export class TabManager {
   }
 
   /** Remove a tab from the strip WITHOUT destroying its WebContentsView and
-   *  hand it to the caller ("Open in New Window" — the live document, unsaved
+   *  hand it to the caller ("Open in New Window" - the live document, unsaved
    *  edits included, moves into a detached editor window). Null while a close
    *  prompt is pending on the tab. */
   detachTab(id: string): DetachedTab | null {
@@ -921,8 +921,8 @@ export class TabManager {
   /**
    * The inverse of detachTab: a live view coming back from a detached window
    * (dock by dragging the window onto the strip, or a tear-off that returned
-   * mid-gesture) becomes a tab again at `index` — Home stays pinned at 0, an
-   * out-of-range or omitted index appends — and is activated. The document,
+   * mid-gesture) becomes a tab again at `index` - Home stays pinned at 0, an
+   * out-of-range or omitted index appends - and is activated. The document,
    * unsaved edits included, is untouched: only the view's parent changes.
    */
   attachTab(record: DetachedTab, index?: number): string {

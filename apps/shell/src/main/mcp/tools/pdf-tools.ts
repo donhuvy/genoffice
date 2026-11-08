@@ -6,11 +6,11 @@ import { readPdfText } from '../../../../../pdf/src/main/read-text'
 import type { McpToolDefinition } from '../mcp-server'
 
 /**
- * PDF reading — the registry's `pdf` family exposes read-only MCP access
+ * PDF reading - the registry's `pdf` family exposes read-only MCP access
  * (`mcp.read`, no session, no generation): the pdf app is a viewer, so an
  * agent reads a PDF's text layer directly from disk through the same
  * main-process pdfium the editor uses. Like read_docx, this is headless and
- * always registered. Read-only is the final design — MCP does not drive the
+ * always registered. Read-only is the final design - MCP does not drive the
  * pdf editor.
  */
 
@@ -28,10 +28,10 @@ export function parsePageList(spec: string, pageCount: number): number[] {
     const trimmed = part.trim()
     if (!trimmed) continue
     const range = trimmed.match(/^(\d+)(?:\s*-\s*(\d+))?$/)
-    if (!range) throw new Error(`invalid page "${trimmed}" — use "3" or "1-5,8"`)
+    if (!range) throw new Error(`invalid page "${trimmed}" - use "3" or "1-5,8"`)
     const from = Number(range[1])
     const to = range[2] === undefined ? from : Number(range[2])
-    if (to < from) throw new Error(`invalid page range "${trimmed}" — end must not precede start`)
+    if (to < from) throw new Error(`invalid page range "${trimmed}" - end must not precede start`)
     for (let p = from; p <= to; p++) {
       if (p < 1 || p > pageCount) throw new Error(`page ${p} is out of range (1-${pageCount})`)
       pages.add(p)
@@ -67,12 +67,12 @@ export function createPdfTools(): McpToolDefinition[] {
         const bytes = new Uint8Array(await readFile(filePath))
         // Probe with a zero budget: it opens the document (which is also what
         // surfaces an encrypted or corrupt file as a clean tool error), reports
-        // the page count, and extracts no page text — the old probe read page 1
+        // the page count, and extracts no page text - the old probe read page 1
         // in full, then the real pass read it again. The span cannot be resolved
         // before the count is known, so the calls stay separate.
         const open = () =>
           readPdfText(bytes, { charBudget: 0 }).catch(() => {
-            throw new Error('could not open the PDF — it may be encrypted or corrupt')
+            throw new Error('could not open the PDF - it may be encrypted or corrupt')
           })
 
         // probe just the page count, then extract the requested span for real

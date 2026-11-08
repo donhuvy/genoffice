@@ -21,7 +21,7 @@ export { PdfLoadError } from '../../../../packages/pdf2docx/src'
 
 /**
  * Local OCR engine for scanned pages (platform system OCR; see
- * packages/pdf2docx/src/ocr.ts) — macOS Vision on darwin, Windows.Media.Ocr
+ * packages/pdf2docx/src/ocr.ts) - macOS Vision on darwin, Windows.Media.Ocr
  * on win32. Optional by design: when the helper binary is absent (Linux, or
  * a build without it) the engine resolves null and scanned pages keep the
  * full-page-image fallback.

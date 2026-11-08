@@ -18,7 +18,7 @@ import {
  * directory, 0600 on POSIX; a per-user named pipe on Windows), every request
  * must carry the random token from userData/control.json (0600), one request
  * per connection, 64 KB cap, and the only commands are "show this spot" and
- * "read the selection" — nothing writes a file or runs code from the request.
+ * "read the selection" - nothing writes a file or runs code from the request.
  */
 export type ControlHandler = (request: ControlRequest) => Promise<ControlReply>
 

@@ -8,8 +8,8 @@ import { PDF_PASSWORD_CHANNELS } from '../shared/pdf-password-api'
  * over the shell window, same lifecycle pattern as update-window.ts. One
  * promptPdfPassword() call resolves with one attempt (the entered password,
  * or null when the user cancels / closes the window). The window survives
- * across attempts — a rejected password re-prompts in place via pushed state
- * — and the caller closes it with closePdfPasswordDialog() when the retry
+ * across attempts - a rejected password re-prompts in place via pushed state
+ * - and the caller closes it with closePdfPasswordDialog() when the retry
  * loop ends (success, cancel or unrelated failure).
  */
 
@@ -52,7 +52,7 @@ export function promptPdfPassword(
   parent: BrowserWindow | null,
   state: PdfPasswordUiState,
 ): Promise<string | null> {
-  // a second prompt while one is pending would orphan the first caller —
+  // a second prompt while one is pending would orphan the first caller -
   // resolve it as cancelled first (cannot happen in the single-flight export
   // path, but keeps the module safe on its own)
   settle(null)

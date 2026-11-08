@@ -36,7 +36,7 @@ import {
 
 /**
  * Detached editor windows: a tab's live WebContentsView reparented into its
- * own BrowserWindow, so the document — including unsaved edits — moves
+ * own BrowserWindow, so the document - including unsaved edits - moves
  * without a reload. Three ways in, two ways out:
  *
  *   in:  "Open in New Window" on a tab; dragging a tab off the strip
@@ -48,7 +48,7 @@ import {
  *
  * The window uses the native frame (the shell's tab strip is the drag surface
  * in tab mode; a detached window has none), and the focused window claims the
- * process-global menu/active-editor targets — the shell's tab manager takes
+ * process-global menu/active-editor targets - the shell's tab manager takes
  * them back on its own window's focus (refreshActiveTargets).
  */
 interface DetachedRecord {
@@ -66,7 +66,7 @@ interface DetachedRecord {
   dockTimer: ReturnType<typeof setTimeout> | null
 }
 
-/** keyed by the view's webContents id — the same key the app modules use */
+/** keyed by the view's webContents id - the same key the app modules use */
 const detached = new Map<number, DetachedRecord>()
 
 /** tab-style ids for the control host / MCP: `detached:<webContents id>` */
@@ -284,7 +284,7 @@ export async function detachedOpenDocuments(): Promise<OpenDocumentTab[]> {
   return out
 }
 
-/** Save As / open-in-place landed on a new path — keep the window title and
+/** Save As / open-in-place landed on a new path - keep the window title and
  *  the dedup registry in sync (same contract as TabManager.setTabFileFor). */
 export function detachedSetFileFor(webContentsId: number, filePath: string): void {
   const rec = detached.get(webContentsId)
@@ -301,7 +301,7 @@ export function detachedSetTitleFor(webContentsId: number, title: string): void 
   rec.window.setTitle(title)
 }
 
-/** a rename on disk (Home list) — follow it, same contract as renameTabFile */
+/** a rename on disk (Home list) - follow it, same contract as renameTabFile */
 export function detachedRenameFile(
   oldPath: string,
   newPath: string,
@@ -340,7 +340,7 @@ function clearDockHover(rec: DetachedRecord): void {
 
 /**
  * Lift the document out of its window without closing the renderer: the view
- * is unparented and the window destroyed (no close prompt — nothing is being
+ * is unparented and the window destroyed (no close prompt - nothing is being
  * discarded). The caller re-homes the view.
  */
 function releaseDetached(rec: DetachedRecord): DetachedTab {
@@ -423,7 +423,7 @@ export function createDetachedEditorWindow(options: {
   applyMenuFor: (kind: TabKind) => void
   /**
    * tear-off: place the window so the pointer at this screen point sits in
-   * its title bar, and show it without focus — the shell keeps receiving the
+   * its title bar, and show it without focus - the shell keeps receiving the
    * held pointer's moves and steers the window until release
    */
   tearOffAt?: { x: number; y: number }
@@ -445,7 +445,7 @@ export function createDetachedEditorWindow(options: {
   const wcId = view.webContents.id
   let closeConfirmed = false
   // Detach the view before destroying the window so the docs teardown path
-  // (which must never close the webContents — see TabManager.closeTab) stays
+  // (which must never close the webContents - see TabManager.closeTab) stays
   // in control of the renderer's lifetime.
   const tearDown = () => {
     if (win.isDestroyed() || rec.released) return

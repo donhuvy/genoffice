@@ -677,7 +677,7 @@ interface GroupPickerProps {
 }
 
 /** Modal moving starred files into a named group. Deliberately minimal: no
- *  group rename/delete — a group is just a label its entries carry, and it
+ *  group rename/delete - a group is just a label its entries carry, and it
  *  vanishes when its last member leaves (via this dialog's remove action,
  *  an unstar, or a deleted file). */
 function GroupPicker({ groups, count, onCancel, onPick, onCreate, onRemove }: GroupPickerProps) {
@@ -782,7 +782,7 @@ function AccountEntry({
   const [loginError, setLoginError] = useState<
     'timeout' | 'launch' | 'network' | 'expired' | 'failed' | null
   >(null)
-  // auth URL reported by the login CLI — rescue entry when the browser did not open
+  // auth URL reported by the login CLI - rescue entry when the browser did not open
   const [authUrl, setAuthUrl] = useState<string | null>(null)
   const [urlCopied, setUrlCopied] = useState(false)
   const loginDeadline = useRef(0)
@@ -957,7 +957,7 @@ function AccountEntry({
             className={`login-hint-copy${urlCopied ? ' copied' : ''}`}
             onClick={copyLoginUrl}
             // static tip: screentips are suppressed from pointerdown until the pointer
-            // leaves the control, so a swapped-in "copied" tip would never show — the
+            // leaves the control, so a swapped-in "copied" tip would never show - the
             // check-mark icon is the visible feedback
             data-tip={t('loginCopyUrl')}
             aria-label={urlCopied ? t('loginCopied') : t('loginCopyUrl')}
@@ -1165,7 +1165,7 @@ function CloudProjectsView() {
     void window.aiOffice.openCloudProject?.(projectUrl)
   }
 
-  // filter / search / sort are all local over the snapshot — no requests
+  // filter / search / sort are all local over the snapshot - no requests
   const q = query.trim().toLowerCase()
   let list = snapshot?.projects.filter((proj) => kind === 'all' || proj.kind === kind) ?? []
   if (q) list = list.filter((proj) => proj.title.toLowerCase().includes(q))
@@ -1390,7 +1390,7 @@ function CloudProjectsView() {
 // ── Drop-to-open overlay ────────────────────────────────
 
 /**
- * Full-window affordance while OS files hover over Home. Purely visual — the
+ * Full-window affordance while OS files hover over Home. Purely visual - the
  * actual open is owned by the preload drop bridge (installDropOpenBridge), so
  * this overlay stays pointer-events:none and never handles events itself.
  * Visibility tracks a dragenter/dragleave depth counter: `dragover` stops
@@ -1404,7 +1404,7 @@ function DropToOpenOverlay(): ReactElement | null {
     let depth = 0
     const hasFiles = (ev: DragEvent): boolean => ev.dataTransfer?.types.includes('Files') ?? false
     // NB: the preload drop bridge also listens here and cancels file drags, so
-    // defaultPrevented can't discriminate anything at this layer — only zones
+    // defaultPrevented can't discriminate anything at this layer - only zones
     // that stopPropagation (none on Home) would keep us out entirely.
     const onDragEnter = (ev: DragEvent) => {
       if (!hasFiles(ev)) return
@@ -1511,12 +1511,12 @@ export function Home() {
   const [fileSortMenuOpen, setFileSortMenuOpen] = useState(false)
   const fileSortRef = useRef<HTMLDivElement>(null)
   const [rowMenu, setRowMenu] = useState<string | null>(null)
-  // actions cell (… button + menu) of the row whose menu is open — the dismissal guard root
+  // actions cell (… button + menu) of the row whose menu is open - the dismissal guard root
   const rowMenuWrapRef = useRef<HTMLSpanElement>(null)
   const [selected, setSelected] = useState<ReadonlySet<string>>(new Set())
   const [renaming, setRenaming] = useState<{ path: string; value: string } | null>(null)
   const [confirmDelete, setConfirmDelete] = useState<string[] | null>(null)
-  // unavailable recent entry (missing flag) the user clicked — offer list removal
+  // unavailable recent entry (missing flag) the user clicked - offer list removal
   const [confirmMissing, setConfirmMissing] = useState<RecentEntry | null>(null)
   // name in the greeting; omitted when logged out
   const [accountName, setAccountName] = useState('')
@@ -1796,14 +1796,14 @@ export function Home() {
   const loadMoreRef = useRef(loadMore)
   loadMoreRef.current = loadMore
 
-  // oldest-first over a partially loaded list would miss the tail pages —
+  // oldest-first over a partially loaded list would miss the tail pages -
   // keep pulling until the list is complete (backend caps recents at 100)
   useEffect(() => {
     if (fileSort === 'oldest' && hasMore) loadMoreRef.current()
   }, [fileSort, hasMore, entries.length])
 
   // Load the next page once the bottom sentinel enters the viewport (240px early);
-  // depending on entries.length rebuilds the observer after each page — observe fires an immediate
+  // depending on entries.length rebuilds the observer after each page - observe fires an immediate
   // callback, so while the sentinel stays in view we keep loading until full or exhausted
   const sentinelRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -2667,9 +2667,9 @@ export function Home() {
             {locationLabel(entry.path, roots)}
           </span>
           <span className="recent-time">
-            {entry.missing ? '—' : formatModified(entry.mtimeMs, i18n)}
+            {entry.missing ? '-' : formatModified(entry.mtimeMs, i18n)}
           </span>
-          <span className="recent-size">{entry.missing ? '—' : formatSize(entry.sizeBytes)}</span>
+          <span className="recent-size">{entry.missing ? '-' : formatSize(entry.sizeBytes)}</span>
           <button
             className={`star-btn${entry.starred ? ' starred' : ''}`}
             aria-label={entry.starred ? t('unstar') : t('star')}
@@ -2864,7 +2864,7 @@ export function Home() {
           )}
           <span className="recent-path">{t('folderType')}</span>
           <span className="recent-time">{formatModified(entry.mtimeMs, i18n)}</span>
-          <span className="recent-size">—</span>
+          <span className="recent-size">-</span>
           <span />
           <span
             className="recent-actions"

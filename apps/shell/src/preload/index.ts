@@ -631,7 +631,7 @@ const homeApi: HomeApi = {
   getAiProviders() {
     return AI_PROVIDERS.map((meta) => {
       let defaultBaseUrl = ''
-      // genspark routes by model and custom has no default — both stay ''
+      // genspark routes by model and custom has no default - both stay ''
       if (meta.id !== 'genspark' && !meta.needsBaseUrl && !meta.needsCliPath) {
         defaultBaseUrl = getProviderAdapter(meta.id).resolveEndpoint({
           apiKey: '',
@@ -709,7 +709,7 @@ contextBridge.exposeInMainWorld('aiOffice', homeApi)
  *
  * A global of its own rather than part of `aiOffice`: `aiOffice` is the
  * shell's home API, and an editor window that reused the name would shadow it
- * there — `window.aiOffice.setTheme` would vanish with it.
+ * there - `window.aiOffice.setTheme` would vanish with it.
  */
 const aiNamingApi = {
   suggestFileName(input: { content: string }) {

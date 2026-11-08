@@ -25,7 +25,7 @@ export function HelpScreen(): React.ReactElement {
   const { t, lang } = useI18n()
   // the help tab has no locale of its own: it renders in the shell's UI language.
   // `lang` is the shell's own `Lang`, which is the short code every lookup here
-  // keys on — `zh`, `ja`, `zh-TW`. `document.documentElement.lang` is the BCP-47
+  // keys on - `zh`, `ja`, `zh-TW`. `document.documentElement.lang` is the BCP-47
   // tag instead (`zh-CN`, `ja-JP`), and handing that to a table keyed by short
   // codes silently misses every row, so the screen showed English titles over a
   // body in whatever language matched `startsWith('zh')`.

@@ -17,14 +17,14 @@ import type { CliRunner } from '../cli-runner'
  *   setting. No deck-building code lives here;
  * - a visible deck session: the tools drive a real slides tab the user watches.
  *   Slides sessions live in the slides main process, so the control talks to
- *   main-process state directly (no renderer bridge) — see
+ *   main-process state directly (no renderer bridge) - see
  *   `apps/shell/src/main/mcp/slides-bridge.ts`.
  */
 
 export interface SlidesToolDeps {
   /** directory generated files land in when the caller gives no path */
   defaultSaveDir: () => string
-  /** expose the headless create_pptx tool; default true — the shell passes the user's setting */
+  /** expose the headless create_pptx tool; default true - the shell passes the user's setting */
   background?: boolean
   /** visible-deck control; absent in headless/unit runs, which drops the session tools */
   slides?: SlidesControl
@@ -144,7 +144,7 @@ export function slidesDriver(slides: SlidesControl): FamilyDriver {
  * session (the same one the app's own editing and built-in AI use), so every
  * step lands in the app's undo history and the tab re-renders live.
  *
- * Only registered when the shell wired a SlidesControl — headless/unit runs
+ * Only registered when the shell wired a SlidesControl - headless/unit runs
  * keep the file-only surface.
  */
 function createDeckContentTools(deps: SlidesToolDeps, host: SessionHost): McpToolDefinition[] {
@@ -180,7 +180,7 @@ function createDeckContentTools(deps: SlidesToolDeps, host: SessionHost): McpToo
         'addElement (textbox/shapes/lines), addTable, addChart, addBlankSlide, deleteSlide, moveSlide, ' +
         'duplicateSlide, deleteElement, setFill, setStroke, setTransform, setBackground, applyTheme, ' +
         'findReplace, setTableCell, tableStructure, setTransition, setNotes. A failing atomic batch ' +
-        'changes nothing — fix the op named in the error and resend the whole batch. ' +
+        'changes nothing - fix the op named in the error and resend the whole batch. ' +
         'Use read_deck for ids and geometry first.',
       inputSchema: {
         ops: z.array(z.any()).describe('array of op objects (at most 50 per transaction)').max(50),

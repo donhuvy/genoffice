@@ -17,19 +17,19 @@ import type { CliRunner } from '../cli-runner'
  *   (`create --type xlsx --from`), gated behind the "background generation"
  *   setting. The CLI writes through the app's xlsx gateway and evaluates
  *   formulas with the sidecar, so strings starting with "=" become real formula
- *   cells with cached values — more than the values-only writer this used to
+ *   cells with cached values - more than the values-only writer this used to
  *   carry.
  * - a visible grid session: the tools drive a real sheets tab the user
  *   watches. The workbook lives in the renderer (Univer), so this needs a
  *   request/response bridge into the renderer (`sheets-bridge.ts` here, the
- *   renderer half at `apps/sheets/src/renderer/mcp-bridge.ts`) — the same
+ *   renderer half at `apps/sheets/src/renderer/mcp-bridge.ts`) - the same
  *   pattern as the docs session.
  */
 
 export interface SheetsToolDeps {
   /** directory generated files land in when the caller gives no path */
   defaultSaveDir: () => string
-  /** expose the headless create_xlsx tool; default true — the shell passes the user's setting */
+  /** expose the headless create_xlsx tool; default true - the shell passes the user's setting */
   background?: boolean
   /** visible-grid control; absent in headless/unit runs, which drops the session tools */
   sheets?: SheetsControl
@@ -143,7 +143,7 @@ function createSheetLinksTool(deps: SheetsToolDeps): McpToolDefinition {
       '.xlsx file) without opening the app. Default action lists every link with its index, ' +
       'resolved source path and reachability. `update: true` re-reads reachable sources and ' +
       "writes the computed values as the formulas' cached values (formulas untouched). " +
-      '`break` severs the chosen 1-based links — their formulas keep their current cached ' +
+      '`break` severs the chosen 1-based links - their formulas keep their current cached ' +
       'values as literals and the surviving links renumber.',
     inputSchema: {
       path: z.string().describe('absolute path to the .xlsx file'),
@@ -221,7 +221,7 @@ export function sheetsDriver(sheets: SheetsControl): FamilyDriver {
  * workbook DSL the built-in AI uses (planFromOps + applyChangePlan), executed by
  * the tab's renderer.
  *
- * Only registered when the shell wired a SheetsControl — headless/unit runs
+ * Only registered when the shell wired a SheetsControl - headless/unit runs
  * keep the file-only surface.
  */
 function createGridContentTools(deps: SheetsToolDeps, host: SessionHost): McpToolDefinition[] {
@@ -285,7 +285,7 @@ function createGridContentTools(deps: SheetsToolDeps, host: SessionHost): McpToo
         'clear_range, fill_range, copy_range, move_range, convert_to_values, insert_rows, delete_rows, ' +
         'insert_cols, delete_cols, add_sheet, delete_sheet, add_chart, add_table, set_filter, ' +
         'set_hyperlink, add_conditional_format, set_data_validation, set_note. Address a worksheet ' +
-        "by NAME with `sheet` (also `sourceSheet`/`targetSheet`) — the CLI's stable vocabulary — " +
+        "by NAME with `sheet` (also `sourceSheet`/`targetSheet`) - the CLI's stable vocabulary - " +
         'or with `sheetId` from read_sheet; a name that is not in the workbook is rejected before ' +
         'anything applies. The target sheet is brought into view so the user sees the edit. ' +
         'Addresses are A1. One batch applies as one undo step; a failed batch changes nothing.',

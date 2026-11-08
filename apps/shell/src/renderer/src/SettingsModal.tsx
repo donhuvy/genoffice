@@ -57,7 +57,7 @@ import './settings.css'
 // Genspark-style two-pane dialog: section nav on the left, fields on the right.
 // All values go through the existing home IPC; nothing is stored locally.
 
-// sorted by ISO 639 language code — native-script labels have no natural
+// sorted by ISO 639 language code - native-script labels have no natural
 // shared alphabet, so the code is the ordering key
 const LANG_OPTIONS = [
   { value: 'ar', label: 'العربية' },
@@ -111,7 +111,7 @@ const CHANNEL_OPTIONS = [
   { value: 'beta', labelKey: 'channelBeta' },
 ] as const satisfies readonly { value: 'stable' | 'beta'; labelKey: StringKey }[]
 
-/** GitHub-style abbreviated stargazer count (2591 → "2.6k") — the number is
+/** GitHub-style abbreviated stargazer count (2591 → "2.6k") - the number is
  * social proof, not a metric; the cached/exact value would only look stale */
 function formatStars(n: number): string {
   if (n < 1000) return String(n)
@@ -366,7 +366,7 @@ function AiModelPane({ t }: { t: TFunc }) {
         // The switch is disabled with genspark, so never present it stranded
         // off. Display-only: s.provider may be the activeProvider fallback for
         // a half-configured BYOK selection, so writing anything back here would
-        // clobber the stored choice — the main process heals a genuine legacy
+        // clobber the stored choice - the main process heals a genuine legacy
         // genspark+off file itself, judged on the raw stored provider.
         if (s.provider === 'genspark' && s.gskToolsEnabled === false) {
           s = { ...s, gskToolsEnabled: true }
@@ -391,7 +391,7 @@ function AiModelPane({ t }: { t: TFunc }) {
   // A user-hosted endpoint gets the same live model list as Codex, asked of the
   // endpoint itself. Keyed on the catalog's `needsBaseUrl` flag rather than on
   // the literal 'custom' id, so it follows the slot rather than the name, and
-  // stays a no-op while any other provider is selected — a local server saved
+  // stays a no-op while any other provider is selected - a local server saved
   // months ago is never contacted while Genspark is in use. Aggregators flagged
   // `liveModels` (OpenRouter) join in at their default address, their shipped
   // list standing in until the catalog answers.
@@ -423,8 +423,8 @@ function AiModelPane({ t }: { t: TFunc }) {
 
   useEffect(() => {
     if (!endpointProvider) return
-    // A list belonging to a different server — or to no server, once the address
-    // is cleared — is misinformation, so it goes the moment the address changes:
+    // A list belonging to a different server - or to no server, once the address
+    // is cleared - is misinformation, so it goes the moment the address changes:
     // the free-text box is the honest thing to show while the answer is unknown.
     if (listedForRef.current && listedForRef.current !== endpointBaseUrl) {
       listedForRef.current = ''
@@ -441,7 +441,7 @@ function AiModelPane({ t }: { t: TFunc }) {
           // must not wipe a picker mid-use.
           if (cancelled || !live || live.models.length === 0) return
           // A hand-typed id is pinned to the top so it never vanishes from the
-          // picker. The catalog is the only thing written — writing settings
+          // picker. The catalog is the only thing written - writing settings
           // here would revert whatever the user typed while the probe was in
           // flight, since `updateConfig` rebuilds them from its own render.
           const selected = selectedModelRef.current.trim()
@@ -584,7 +584,7 @@ function AiModelPane({ t }: { t: TFunc }) {
     let toSave = settings
     if (endpoint && listedForRef.current && listedForRef.current === endpoint.baseUrl) {
       const live = (meta?.models ?? []).filter((m) => m !== endpoint.model)
-      // The probe's capability facts refresh the cache beside the id list —
+      // The probe's capability facts refresh the cache beside the id list -
       // never the user's declarations, which stay exactly as typed. A model
       // the server stops serving stops being described on the next probe.
       const probed = probedProfilesRef.current
@@ -1087,7 +1087,7 @@ function AiModelPane({ t }: { t: TFunc }) {
             <div className="set-field-desc">{t('setAiGskToolsDesc')}</div>
           </div>
         </div>
-        {/* locked on with the genspark provider — chat runs through gsk anyway */}
+        {/* locked on with the genspark provider - chat runs through gsk anyway */}
         <button
           className="set-switch"
           role="switch"
@@ -1132,8 +1132,8 @@ const DECISION_ENDPOINTS: { value: DecisionEndpoint; label: string }[] = [
 ]
 
 /**
- * AI media & search pane, one block per capability — web search, image
- * generation, image analysis, video analysis — each with the same
+ * AI media & search pane, one block per capability - web search, image
+ * generation, image analysis, video analysis - each with the same
  * provider / model / key / base URL rows as the AI Model pane. A vendor's key
  * and base URL are stored once and shared by every block that picks it.
  * Saved into the same ai-settings.json as the chat provider.
@@ -1721,7 +1721,7 @@ function AiStatusPill({ status }: { status: AiStatus | null }) {
     <span
       className={`set-ai-status ${status.kind}`}
       role="status"
-      // error text (HTTP body, network message) can be long — full text via native tooltip
+      // error text (HTTP body, network message) can be long - full text via native tooltip
       title={status.kind === 'err' ? status.text : undefined}
     >
       {status.kind === 'testing' ? (
@@ -1767,7 +1767,7 @@ export interface SettingsModalProps {
   loggingOut: boolean
   /** browser sign-in in progress (spinner shows on the account entry) */
   loginWaiting: boolean
-  /** device auth URL while waiting — rescue actions when the browser did not auto-open */
+  /** device auth URL while waiting - rescue actions when the browser did not auto-open */
   loginUrl: string | null
   urlCopied: boolean
   onOpenLoginUrl: () => void
@@ -2015,7 +2015,7 @@ export function SettingsModal({
                     label={t('credits')}
                     value={
                       status?.creditBalance === undefined
-                        ? '—'
+                        ? '-'
                         : Math.floor(status.creditBalance).toLocaleString('en-US')
                     }
                     action={
@@ -2262,7 +2262,7 @@ export function SettingsModal({
                 )}
                 <Field
                   label={t('saveLocation')}
-                  value={saveDir || '—'}
+                  value={saveDir || '-'}
                   valueTitle={saveDir}
                   action={
                     <button className="set-btn" onClick={changeSaveDir}>
@@ -2362,7 +2362,7 @@ export function SettingsModal({
             {section === 'about' && (
               <>
                 <h3 className="set-pane-title">{t('setSecAbout')}</h3>
-                <Field label={t('versionLabel')} value={appVersion || '—'} />
+                <Field label={t('versionLabel')} value={appVersion || '-'} />
                 <Field label="Sản phẩm" value="BKIT Office" />
                 <Field label="Đơn vị phát triển" value="Công ty TNHH BKIT Việt Nam" />
                 <Field

@@ -48,7 +48,7 @@ function renderEmphasis(text: string) {
 }
 
 /* exact vectors from the design spec:
- * 60px canvas, 4px strokes — same visual mass as the 60px app icon */
+ * 60px canvas, 4px strokes - same visual mass as the 60px app icon */
 function SlideArt({ kind }: { kind: Slide['art'] }) {
   if (kind === 'logo') {
     return <img className="onb-art onb-art-logo" src={appIcon} alt="" />
@@ -120,7 +120,7 @@ export function Onboarding({ onDone }: OnboardingProps) {
   }, [])
 
   // slide changes can strip focus from the active control (leaving slide 2
-  // makes its GenTeam button inert, which blurs it) — pull focus back onto the
+  // makes its GenTeam button inert, which blurs it) - pull focus back onto the
   // card so it never drops to body
   useEffect(() => {
     const card = cardRef.current
@@ -141,7 +141,7 @@ export function Onboarding({ onDone }: OnboardingProps) {
         const card = cardRef.current
         if (!card) return
         // inactive slides stay mounted (stacked for the height lock) but are
-        // inert — their buttons must not enter the tab cycle
+        // inert - their buttons must not enter the tab cycle
         const focusables = Array.from(card.querySelectorAll<HTMLElement>('button')).filter(
           (el) => !el.closest('[inert]'),
         )

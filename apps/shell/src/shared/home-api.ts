@@ -128,9 +128,9 @@ export interface RecentEntry {
   /** whether the user starred this file */
   starred: boolean
   /** the starred group this file belongs to (absent when ungrouped); only
-      populated by the starred() query — the other list queries omit it */
+      populated by the starred() query - the other list queries omit it */
   group?: string
-  /** the path failed to stat (disconnected drive, moved, deleted) — kept
+  /** the path failed to stat (disconnected drive, moved, deleted) - kept
       listed like Word's recents instead of silently dropped (r158) */
   missing?: boolean
 }
@@ -179,7 +179,7 @@ export interface FileSearchHit extends RecentEntry {
 /**
  * The decision-model routes the app can call. Several vendors publish more
  * than one size or generation behind the same URL, and the difference is only
- * the `model` in the body — but they are listed separately rather than folded
+ * the `model` in the body - but they are listed separately rather than folded
  * into one option with a model picker, because picking the wrong one costs
  * real money per call and a dropdown that names them is the safer surface.
  */
@@ -500,7 +500,7 @@ export interface HomeApi {
     apiKey?: string,
     api?: AiCustomProtocol,
   ): Promise<CodexModelCatalog>
-  /** one-shot round trip against the given (possibly unsaved) settings — the settings-UI connection test */
+  /** one-shot round trip against the given (possibly unsaved) settings - the settings-UI connection test */
   testAiSettings(settings: AiSettings): Promise<AiChatResponse>
   /** image generation / media analysis provider catalog */
   getAiMediaProviders(): AiMediaProviderMeta[]
@@ -530,7 +530,7 @@ export type StarPromptAction = 'starred' | 'later'
 /** answer to starPromptShouldShow */
 export interface StarPromptShow {
   show: boolean
-  /** lifetime documents opened — drives the personalized card title */
+  /** lifetime documents opened - drives the personalized card title */
   docOpens: number
 }
 

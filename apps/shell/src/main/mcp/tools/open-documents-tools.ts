@@ -7,7 +7,7 @@ import { formatFamily, familyLabel, type EditorFamily } from './formats'
 import { sanitizeFileBase, uniquePathIn } from './document-tools'
 
 /**
- * MCP access to the documents the *user* has open — the tab-manager's list of
+ * MCP access to the documents the *user* has open - the tab-manager's list of
  * editor tabs, not the single blank session `create_session` owns. The actions
  * share one tool because they are steps of one workflow: discover, read or
  * commit the file, then act on what was discovered.
@@ -108,7 +108,7 @@ function normalizePath(value: string): string {
  * Resolve an open document addressed by tab id or path, requiring it to belong
  * to `family`. This is the shared lookup behind the content tools' optional
  * `document` argument, so "point this edit at a tab the user opened" behaves
- * exactly like `open_documents` — same matching rules, same guided errors.
+ * exactly like `open_documents` - same matching rules, same guided errors.
  */
 export function resolveOpenDocumentOfFamily(
   documents: readonly OpenDocumentTab[],
@@ -132,7 +132,7 @@ function noMatch(target: string, documents: readonly OpenDocumentTab[]): Error {
     return new Error(`no document is open in GenOffice, so "${target}" cannot be resolved`)
   }
   const listing = documents
-    .map((doc) => `  ${doc.id}  ${doc.filePath ?? '(never saved)'}  — ${typeLabel(doc)}`)
+    .map((doc) => `  ${doc.id}  ${doc.filePath ?? '(never saved)'}  - ${typeLabel(doc)}`)
     .join('\n')
   return new Error(`no open document matches "${target}". Currently open:\n${listing}`)
 }
@@ -172,14 +172,14 @@ export function createOpenDocumentTools(deps: OpenDocumentsDeps): McpToolDefinit
     {
       name: 'open_documents',
       description:
-        'Work with the documents the user currently has open in GenOffice tabs — not just the ' +
+        'Work with the documents the user currently has open in GenOffice tabs - not just the ' +
         'one a session opened. Actions: "list" (no target) returns every open document with its ' +
         'id, type, path, title, whether it has ever been saved, and whether it has unsaved ' +
         'changes; "read" returns one document\'s live content including unsaved edits; "save" ' +
         "writes that live content back to the document's own file (or a fresh file in the " +
         'default save folder when it has never been saved) and leaves the tab open; "close" ' +
         'closes one, saving it first by default (pass unsaved:"discard" to drop the changes). ' +
-        'Both "save" and "close" write over the document\'s own file when it has a path — they ' +
+        'Both "save" and "close" write over the document\'s own file when it has a path - they ' +
         'do not stop to ask, so the saved file replaces whatever was on disk. ' +
         'Identify a document by its path, or by the id from "list" when it has never been saved. ' +
         'To *edit* one of these documents, pass its id (or path) as the `document` argument of the ' +
@@ -188,7 +188,7 @@ export function createOpenDocumentTools(deps: OpenDocumentsDeps): McpToolDefinit
         'PDF tabs are listed and can be closed, but this tool does not read or save them: the ' +
         'pdf app is a viewer, so an open PDF has no live editable content. Read a PDF with ' +
         'read_pdf; it cannot be written back. Closing one just ' +
-        'drops the tab — a PDF with unsaved annotations (its only unsaved state) must be closed ' +
+        'drops the tab - a PDF with unsaved annotations (its only unsaved state) must be closed ' +
         'with unsaved:"discard".',
       inputSchema: {
         action: z.enum(['list', 'read', 'save', 'close']).describe('what to do'),
@@ -221,7 +221,7 @@ export function createOpenDocumentTools(deps: OpenDocumentsDeps): McpToolDefinit
         if (action === 'read') {
           if (!READABLE_KINDS.has(doc.kind)) {
             throw new Error(
-              `"${doc.title}" is a PDF: the pdf app is a viewer, so this tool cannot read it — ` +
+              `"${doc.title}" is a PDF: the pdf app is a viewer, so this tool cannot read it - ` +
                 'read_pdf returns its text',
             )
           }
@@ -268,7 +268,7 @@ export function createOpenDocumentTools(deps: OpenDocumentsDeps): McpToolDefinit
           }
         }
 
-        throw new Error(`unknown action "${action}" — use "list", "read", "save" or "close"`)
+        throw new Error(`unknown action "${action}" - use "list", "read", "save" or "close"`)
       },
     },
   ]

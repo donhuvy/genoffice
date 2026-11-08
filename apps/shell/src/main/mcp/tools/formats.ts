@@ -1,5 +1,5 @@
 /**
- * Format capability registry — the MCP layer's single source of truth for
+ * Format capability registry - the MCP layer's single source of truth for
  * "which document formats each editor can open, save and export".
  *
  * The authority is the shell's own routing and each editor's Save-As dialog:
@@ -80,7 +80,7 @@ export const FORMAT_FAMILIES: readonly FormatFamily[] = [
   {
     family: 'pptx',
     label: 'presentation',
-    // .odp/.otp open as converted copies and save as .pptx — open-only for
+    // .odp/.otp open as converted copies and save as .pptx - open-only for
     // the same reason as .odt/.ods
     editorOpen: ['pptx', 'odp', 'otp'],
     editorSave: ['pptx'],

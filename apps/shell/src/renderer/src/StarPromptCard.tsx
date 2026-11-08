@@ -9,14 +9,14 @@ import './star-prompt.css'
  */
 
 /** with at least this many opens, the title reflects the user's own usage
- * ("you've opened N documents") — the strongest-converting copy per industry
+ * ("you've opened N documents") - the strongest-converting copy per industry
  * data; below it (e.g. upgrade-launch prompts) fall back to the generic title */
 const PERSONALIZED_MIN_OPENS = 5
 
 interface StarPromptCardProps {
   /** lifetime documents opened, from the main process's prompt state */
   docOpens: number
-  /** called after the user reacts, whatever the reaction — unmounts the card */
+  /** called after the user reacts, whatever the reaction - unmounts the card */
   onClose: () => void
 }
 

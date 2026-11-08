@@ -7,7 +7,7 @@ import { spawn } from 'node:child_process'
  * runtime, so the headless MCP tools do not reimplement document engines: they
  * spawn the same CLI a shell user or another agent would, with `--json`, and
  * map its result contract (`{ status, command, summary, output_path, detail }`,
- * exit codes 0-4 — see packages/cli/src/result.ts) back to a tool result.
+ * exit codes 0-4 - see packages/cli/src/result.ts) back to a tool result.
  *
  * Spawning (not importing) is deliberate: the CLI entry bundles jsdom/jszip/
  * undici and the whole engine surface, none of which belongs inside the Electron
@@ -54,7 +54,7 @@ export interface CliRunOptions {
 }
 
 export interface CliRunner {
-  /** run `genoffice <args> --json`; never rejects — failures come back as `ok:false` */
+  /** run `genoffice <args> --json`; never rejects - failures come back as `ok:false` */
   run(args: string[], options?: CliRunOptions): Promise<CliRunOutcome>
 }
 

@@ -1,8 +1,8 @@
 /**
  * Pre-tokenizer feeding SQLite FTS5 (unicode61 has no CJK segmentation: a run of
  * Han/kana/hangul is one token, so a two-character word never matches inside a longer run).
- * CJK runs become character bigrams — the shape Obsidian's search plugins and
- * Logseq use — while Latin/digit runs stay whole words. A parallel unigram
+ * CJK runs become character bigrams - the shape Obsidian's search plugins and
+ * Logseq use - while Latin/digit runs stay whole words. A parallel unigram
  * stream serves one-character CJK queries, which bigrams cannot answer.
  */
 

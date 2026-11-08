@@ -77,7 +77,7 @@ export interface OpenTargetDeps {
  * Resolver behind the content tools' optional `document` argument: an agent can
  * point an edit at a tab the *user* has open (by tab id or path) instead of the
  * blank one `create_session` opened. Every family's bridge is addressed by
- * webContents id, so a resolved tab needs no session of its own — the caller
+ * webContents id, so a resolved tab needs no session of its own - the caller
  * edits what the user is looking at, and the user decides when to save it.
  *
  * Like `createOpenDocumentsControl`, this lives behind an injected dep so the
@@ -209,7 +209,7 @@ export function createOpenDocumentsControl(deps: OpenDocumentsBridgeDeps): OpenD
       let savedPath: string | undefined
       if (live.kind === 'pdf') {
         // A PDF has no content this tool can write back, so a close can only drop
-        // the tab. Its one unsaved state — annotations drawn in the viewer — cannot
+        // the tab. Its one unsaved state - annotations drawn in the viewer - cannot
         // be saved here, so refuse to lose it silently when a save-close is asked
         // for; an explicit discard (or a clean PDF) just closes.
         if (unsaved === 'save' && live.dirty) {

@@ -1,17 +1,17 @@
 /**
- * The shell window's geometry across sessions (issue genoffice#2049) — the
+ * The shell window's geometry across sessions (issue genoffice#2049) - the
  * position and size the app reopens with.
  *
  * The state lives in userData/app-settings.json, the file the issue names,
- * under one key. What is stored is `getNormalBounds()` — the window's
- * normal-state rectangle — never the live bounds: a maximized, minimized or
+ * under one key. What is stored is `getNormalBounds()` - the window's
+ * normal-state rectangle - never the live bounds: a maximized, minimized or
  * fullscreen window would otherwise come back as a screen-sized ordinary
  * window. The maximized flag is stored beside the rectangle and re-applied at
  * launch.
  *
  * Reading treats the file as untrusted (it is a plain JSON file a user can
  * edit): malformed geometry falls back to the default placement, and so does
- * a saved position no current display can show — a window whose monitor was
+ * a saved position no current display can show - a window whose monitor was
  * unplugged must not open where it cannot be grabbed. The title strip (the
  * tab bar) is what a user grabs to move the window, so that strip is what has
  * to land on some display's work area.
@@ -31,7 +31,7 @@ export const SHELL_WINDOW_MIN_WIDTH = 720
 export const SHELL_WINDOW_MIN_HEIGHT = 550
 
 /**
- * A saved dimension beyond this is corrupt — the largest real displays are
+ * A saved dimension beyond this is corrupt - the largest real displays are
  * 8K, and a giant window is worse than the default placement.
  */
 const MAX_DIMENSION = 8192
@@ -74,7 +74,7 @@ function isFiniteNumber(value: unknown): value is number {
  *
  * Fractional coordinates are rounded, not rejected: a hand-edited `x: 10.5`
  * still names a real position. Sizes below the window minimum or beyond any
- * display are rejected outright — they describe a window that cannot exist.
+ * display are rejected outright - they describe a window that cannot exist.
  */
 export function parseShellWindowState(value: unknown): ShellWindowState | null {
   if (typeof value !== 'object' || value === null) return null
@@ -100,7 +100,7 @@ export function parseShellWindowState(value: unknown): ShellWindowState | null {
 }
 
 /**
- * Whether some display can still show the window's title strip — the part a
+ * Whether some display can still show the window's title strip - the part a
  * user grabs to bring the window back. The strip is the top of the window
  * (the tab bar doubles as the title bar on Windows/Linux); at least 120px of
  * it must overlap a work area, with most of its height inside. A window
@@ -165,8 +165,8 @@ export function persistShellWindowState(settingsPath: string, win: ShellWindowSo
 
 /**
  * Wire the save policy onto a live window: debounced while the user drags or
- * resizes — a crash or a kill then still leaves the last settled arrangement
- * behind — plus once on close, which is the moment the issue asks for and the
+ * resizes - a crash or a kill then still leaves the last settled arrangement
+ * behind - plus once on close, which is the moment the issue asks for and the
  * one that lands while a debounce is still pending. A vetoed close (the
  * unsaved-changes prompt) saves too; the geometry it is asking about has not
  * moved since, so the write is the same either way.

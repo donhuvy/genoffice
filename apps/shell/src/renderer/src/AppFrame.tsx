@@ -24,7 +24,7 @@ export function AppFrame({ initialOnboardingSeen }: AppFrameProps) {
   }, [])
 
   // The "star us" invitation is decided (and counted as shown) by the main
-  // process; ask once per session, and never while onboarding is up — a
+  // process; ask once per session, and never while onboarding is up - a
   // first-run user can't have met the value threshold anyway.
   useEffect(() => {
     if (showOnboarding) return
@@ -52,12 +52,12 @@ export function AppFrame({ initialOnboardingSeen }: AppFrameProps) {
     <div className="app-frame">
       <TabBar />
       {/* docs/sheets tabs render as WebContentsView children of this window, positioned
-       * by the main process to cover this area — only Home paints its own content here. */}
+       * by the main process to cover this area - only Home paints its own content here. */}
       <div className="app-frame-content" style={{ visibility: homeActive ? 'visible' : 'hidden' }}>
         <Home />
       </div>
       {/* editor WebContentsViews paint above ALL shell DOM, so the overlay only
-       * renders while the home tab is active — it comes back when home does */}
+       * renders while the home tab is active - it comes back when home does */}
       {showOnboarding && homeActive && <Onboarding onDone={finishOnboarding} />}
       {starPromptDocOpens !== null && !showOnboarding && homeActive && (
         <StarPromptCard docOpens={starPromptDocOpens} onClose={() => setStarPromptDocOpens(null)} />

@@ -1,7 +1,7 @@
 /// Knowledge-base channel: the reader's starred files (the star corpus) as
 /// AI can search and read, so an answer can cite the folder and file it came
 /// from. Lives in the shell main process because that is the one place that
-/// already holds both halves — the starred list (readStarredFiles, docs-main)
+/// already holds both halves - the starred list (readStarredFiles, docs-main)
 /// and the full-text index (file-index). The handlers are app-agnostic IPC;
 /// docs wires them into its AI panel first, the other apps can follow.
 ///
@@ -34,7 +34,7 @@ const KB_SEARCH_POOL = 200
 
 /** one corpus entry as the AI (and the panel) sees it */
 export interface KbFile {
-  /** absolute path — also the citation target (filenav:///abs/path) */
+  /** absolute path - also the citation target (filenav:///abs/path) */
   path: string
   /** owning folder name ("contracts" in /Users/me/contracts/lease.docx) */
   folder: string
@@ -116,7 +116,7 @@ export function searchKnowledgeBase(
 }
 
 /** parsed text of one corpus file; throws with a plain message the panel can
- *  show — shell main has no i18n channel of its own (unlike the docs
+ *  show - shell main has no i18n channel of its own (unlike the docs
  *  attachment reader, whose errors carry locale strings and a larger budget) */
 export async function readKnowledgeFileText(filePath: string): Promise<string> {
   const stat = statSync(filePath)

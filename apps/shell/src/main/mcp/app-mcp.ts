@@ -210,7 +210,7 @@ export async function startMcpFromSettings(settings: McpSettings): Promise<void>
 /**
  * Apply a settings change: persist semantics are the caller's job (index.ts
  * writes app-settings.json); here we reconcile the running server with the new
- * values — start, stop, or restart when the port or the exposed tool set changes.
+ * values - start, stop, or restart when the port or the exposed tool set changes.
  */
 export async function applyMcpSettings(settings: McpSettings): Promise<McpStatus> {
   const next = normalize(settings)
@@ -225,7 +225,7 @@ export async function applyMcpSettings(settings: McpSettings): Promise<McpStatus
     return mcpStatus()
   }
   // a background flip changes the exposed tool list, so live sessions must be
-  // dropped and rebuilt — same treatment as a port change
+  // dropped and rebuilt - same treatment as a port change
   if (!wasRunning) {
     await ensureService().start(next.port)
   } else if (portChanged || backgroundChanged) {

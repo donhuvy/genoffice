@@ -3,10 +3,10 @@ import type { Op } from '@genoffice/pptx-ops'
 /**
  * Headless pptx generation for the MCP server: outline -> op sequence.
  *
- * Pure functions over data — no DOM, no Electron, no filesystem. The ops use
+ * Pure functions over data - no DOM, no Electron, no filesystem. The ops use
  * the canonical `@genoffice/pptx-ops` vocabulary and are handed to the
  * `genoffice` CLI (`create --type pptx --ops`), which builds and saves the deck
- * through the same engine the app uses — so this module carries only the
+ * through the same engine the app uses - so this module carries only the
  * ergonomic outline→ops adapter, not any deck-building code.
  *
  * Outline convention (markdown):
@@ -150,12 +150,12 @@ function parseMarkdownOutline(raw: string): OutlineSlide[] {
  * The CLI applies ops one by one to a blank one-slide deck, and later ops can
  * target slides earlier ops added, so a single array is enough: create the extra
  * pages first, then fill every page. (This used to be two `runTxn` batches here
- * because a single transaction plans against pre-transaction state — the CLI's
+ * because a single transaction plans against pre-transaction state - the CLI's
  * per-op application removes that constraint.)
  */
 export function outlineToOps(slides: OutlineSlide[]): Op[] {
   if (slides.length === 0) {
-    throw new Error('outline produced no slides — add at least one "# Slide title" (or JSON entry)')
+    throw new Error('outline produced no slides - add at least one "# Slide title" (or JSON entry)')
   }
   if (slides.length > MAX_OUTLINE_SLIDES) {
     throw new Error(`outline has ${slides.length} slides; the limit is ${MAX_OUTLINE_SLIDES}`)
