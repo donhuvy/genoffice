@@ -560,8 +560,8 @@ const FILE_ASSOCIATIONS = [
 ]
 
 const config = {
-  appId: 'com.genoffice.app',
-  productName: 'GenOffice',
+  appId: 'vn.bkit.office',
+  productName: 'BKIT Office',
   // Resolved from the installed electron package so dependency bumps can
   // never leave a stale hard-coded pin behind (packaging would silently ship
   // the old runtime).
@@ -725,6 +725,10 @@ const config = {
   win: {
     target: [
       {
+        target: 'portable',
+        arch: [winArch],
+      },
+      {
         target: 'nsis',
         arch: [winArch],
       },
@@ -851,6 +855,10 @@ const config = {
   nsis: {
     oneClick: false,
     allowToChangeInstallationDirectory: true,
+    artifactName: '${productName}-${version}-Setup.${ext}',
+  },
+  portable: {
+    artifactName: '${productName}-${version}-Portable.exe',
   },
   beforePack: async (context) => {
     ensurePlatformHelpers()

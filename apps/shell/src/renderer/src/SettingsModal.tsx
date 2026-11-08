@@ -2363,6 +2363,12 @@ export function SettingsModal({
               <>
                 <h3 className="set-pane-title">{t('setSecAbout')}</h3>
                 <Field label={t('versionLabel')} value={appVersion || '—'} />
+                <Field label="Sản phẩm" value="BKIT Office" />
+                <Field label="Đơn vị phát triển" value="Công ty TNHH BKIT Việt Nam" />
+                <Field
+                  label="Bản quyền & Giấy phép"
+                  value="Bản quyền (C) 2026 Công ty TNHH BKIT Việt Nam. Sử dụng mã nguồn giấy phép Apache License 2.0 của GenOffice (Bản quyền (C) 2026 Mainfunc, Inc.) đúng luật bản quyền quốc tế."
+                />
                 {updateState && (
                   <div className="set-field">
                     <div className="set-field-text">

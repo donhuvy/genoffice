@@ -1,11 +1,11 @@
 {
   "name": "@genoffice/shell",
-  "productName": "GenOffice",
+  "productName": "BKIT Office",
   "version": "0.12.0",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/genspark-ai/genoffice",
+  "homepage": "https://bkit.vn",
   "private": true,
-  "description": "Unified GenOffice shell: one app hosting the docs and sheets modules behind a home/launcher window",
+  "description": "BKIT Office - Bo ung dung van phong thong minh tich hop AI",
   "main": "out/main/index.js",
   "desktopName": "genoffice.desktop",
   "scripts": {

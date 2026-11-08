@@ -47,7 +47,7 @@ const EN: Labels = {
   zoomOut: 'Zoom Out',
   fullscreen: 'Full Screen',
   help: 'Help',
-  about: 'About GenOffice',
+  about: 'About BKIT Office',
   checkUpdates: 'Check for Updates…',
   version: 'Version',
   settings: 'Settings…',
@@ -74,7 +74,7 @@ const LABELS: Record<string, Labels> = {
     zoomOut: '缩小',
     fullscreen: '全屏',
     help: '帮助',
-    about: '关于 GenOffice',
+    about: '关于 BKIT Office',
     checkUpdates: '检查更新…',
     version: '版本',
     nameWithAi: '用 AI 命名…',
@@ -489,7 +489,7 @@ const LABELS: Record<string, Labels> = {
     zoomOut: 'Thu nhỏ',
     fullscreen: 'Toàn màn hình',
     help: 'Trợ giúp',
-    about: 'Giới thiệu GenOffice',
+    about: 'Giới thiệu BKIT Office',
     checkUpdates: 'Kiểm tra bản cập nhật…',
     version: 'Phiên bản',
     nameWithAi: 'Đặt tên bằng AI…',
@@ -689,8 +689,8 @@ export function aboutMenuItem(labels: AppMenuLabels): MenuItemConstructorOptions
       const canCheck = updateCheckInvoker !== null
       const { response } = await dialog.showMessageBox({
         type: 'info',
-        title: 'GenOffice',
-        message: 'GenOffice',
+        title: 'BKIT Office',
+        message: 'BKIT Office',
         detail: `${labels.version} ${version}`,
         buttons: ['OK', labels.copy, ...(canCheck ? [labels.checkUpdates] : [])],
         defaultId: 0,
@@ -732,7 +732,7 @@ export function appMenuTemplate(
   labels: AppMenuLabels,
   {
     extra = [],
-    appLabel = 'GenOffice',
+    appLabel = 'BKIT Office',
   }: { extra?: MenuItemConstructorOptions[]; appLabel?: string } = {},
 ): MenuItemConstructorOptions | undefined {
   if (platform !== 'darwin') return undefined
